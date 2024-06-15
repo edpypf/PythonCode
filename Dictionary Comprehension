@@ -27,6 +27,12 @@ cel = list(map(lambda x:(float(5)/9)*(x-32), feh.values()))
 cel_dict=dict(zip(feh.keys(), cel))
 print(cel_dict)
 
-** using dict comprehension
+## using dict comprehension
 cel_dict1 = {k:(float(5)/9)*(v-32) for (k,v) in feh.items()}
 print(cel_dict1)
+## using conditional dict comprehension
+dict = {'a':1, 'b':2, 'c':3, 'd':4}
+new_dict = {k:v for (k,v} in dict.items() if v>3}
+new_dict1 = {k:('even num' if v%2==0 else 'odd num') for (k,v} in dict.items() if v>3}
+
+
