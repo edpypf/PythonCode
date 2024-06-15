@@ -25,3 +25,12 @@ y = [x(a) for a in range(10)]
 input = [1,2,3,2,2,3,4,3,5,6,7,7,8]
 output = {var for var in input for var %2 ==0}
 
+# generator comprehension
+input = [1,2,3,2,2,3,4,3,5,6,7,7,8]
+output = (var for var in input for var %2 ==0)
+print("output values using Generator Comprehension: ", end ='')
+### if we only do print(output), it will show generator itself instead of value, 
+### whenever we use generator, the for loop print will be required 
+for var in output:
+  print(var, end='')
+
