@@ -11,3 +11,7 @@ x = [str.upper() for str in list]
 #Produce a list of a list using list comprehensions
 list = [1,2,3,4,5,6]
 lol = [[a**2, a+5] for a in list]
+
+# Parsing the file using list comprehension
+op = open("python.txt", "r")
+output = [i for i in op if "what" in i]
