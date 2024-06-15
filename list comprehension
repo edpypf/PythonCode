@@ -1,17 +1,23 @@
-#Finding Common numbers from two lists using list comprehensions
+# Finding Common numbers from two lists using list comprehensions
 comm_num=[x for x in List1 for y in List2 if x==y]
 
-#Return numbers from the list which are not equal as a tuple
+# Return numbers from the list which are not equal as a tuple
 Non_comm_num=[(x, y) for x in List1 for y in List2 if x!=y]
 
-#Iterate over a String using list comprehensions
+# Iterate over a String using list comprehensions
 list = ['Hello  World']
 x = [str.upper() for str in list]
 
-#Produce a list of a list using list comprehensions
+# Produce a list of a list using list comprehensions
 list = [1,2,3,4,5,6]
 lol = [[a**2, a+5] for a in list]
 
 # Parsing the file using list comprehension
 op = open("python.txt", "r")
 output = [i for i in op if "what" in i]
+
+# using function in list comprehension
+def x(a):
+  return a**2
+y = [x(a) for a in range(10)]
+
