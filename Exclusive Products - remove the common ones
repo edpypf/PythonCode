@@ -23,7 +23,7 @@ inventory2 = ["Dress", "Skirt", "Coat"]
 print(exclusive_products(inventory1, inventory2))
 # Expected output: ([], ['COAT', 'DRESS', 'SKIRT'])
 
-## better code
+##################################### better code ################################################
 def unique_elements(list1, list2):
     set1 = set(list1)
     set2 = set(list2)
