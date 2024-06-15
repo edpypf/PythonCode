@@ -22,6 +22,7 @@ print(newDict)
 
 # 3> Dictionary Comprehension as lambda function
 feh = {'temp1':10, 'temp2':20, 'temp3':30, 'temp4':40}
+# lambda function to change dict values to be a new list and then zip with original keys to be a new dict
 cel = list(map(lambda x:(float(5)/9)*(x-32), feh.values()))
 cel_dict=dict(zip(feh.keys(), cel))
 print(cel_dict)
