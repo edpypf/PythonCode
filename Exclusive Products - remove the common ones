@@ -1,0 +1,32 @@
+def exclusive_products(inventory1, inventory2):
+    output=[]
+    # find the common product first
+    s1=set(w.upper() for w in inventory1)
+    s2=set(w.upper() for w in inventory2)
+    commonset = s1 & s2
+    output.append(list(s1-commonset))
+    output.append(list(s2-commonset))
+    return output
+                        
+inventory1 = ["Shirt", "Jeans", "Hat"]
+inventory2 = ["jeans", "Belt", "Boots"]
+print(exclusive_products(inventory1, inventory2))
+# Expected output: (['HAT', 'SHIRT'], ['BELT', 'BOOTS'])
+
+inventory1 = ["T-Shirt", "hoodie", "Backpack"]
+inventory2 = ["Backpack", "Hoodie", "t-shirt"]
+print(exclusive_products(inventory1, inventory2))
+# Expected output: ([], [])
+
+inventory1 = []
+inventory2 = ["Dress", "Skirt", "Coat"]
+print(exclusive_products(inventory1, inventory2))
+# Expected output: ([], ['COAT', 'DRESS', 'SKIRT'])
+
+## better code
+def unique_elements(list1, list2):
+    set1 = set(list1)
+    set2 = set(list2)
+    unique_to_1 = sorted(list(set1 - set2))
+    unique_to_2 = sorted(list(set2 - set1))
+    return (unique_to_1, unique_to_2)
