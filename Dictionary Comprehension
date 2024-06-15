@@ -5,11 +5,11 @@ y=dict.values()
 print(y)
 print(dict.items())
 
-# first to use {}, second is to have exp/function(k):exp/function(v), third is to for (k, v) in dict.items() 
+# 1>first to use {}, second is to have exp/function(k):exp/function(v), third is to for (k, v) in dict.items() 
 new_dict_values = {k:v*2 for (k, v) in dict.items()}
 print(new_dict_values)
 
-# Iteration for each elements in dict
+# 2>Iteration for each elements in dict
 ## original code
 dict={}
 for i in range(10):
@@ -19,3 +19,9 @@ for i in range(10):
 dict={}
 newDict = {k:k**2 for k in range(10) if k%2==0}
 print(newDict)
+
+# 3> Dictionary Comprehension as lambda function
+feh = {'temp1':10, 'temp2':20, 'temp3':30, 'temp4':40}
+cel = list(map(lambda x:(float(5)/9)*(x-32), feh.values()))
+cel_dict=dict(zip(feh.keys(), cel))
+print(cel_dict)
