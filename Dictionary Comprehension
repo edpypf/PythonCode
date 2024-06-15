@@ -1,0 +1,21 @@
+dict = {'a':1, 'b':2, 'c':3, 'd':4}
+x=dict.keys()
+print(x)
+y=dict.values()
+print(y)
+print(dict.items())
+
+# first to use {}, second is to have exp/function(k):exp/function(v), third is to for (k, v) in dict.items() 
+new_dict_values = {k:v*2 for (k, v) in dict.items()}
+print(new_dict_values)
+
+# Iteration for each elements in dict
+## original code
+dict={}
+for i in range(10):
+  if i%2==0:
+    dict[i]=i**2
+## list comprehension
+dict={}
+newDict = {k:k**2 for k in range(10) if k%2==0}
+print(newDict)
