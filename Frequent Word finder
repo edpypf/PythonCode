@@ -9,6 +9,7 @@ def rare_words_finder(text):
         wcount[word] += 1
     if not text:
         return []
+    ## instead of returning tuples(word, count), should return just the words, extract word from sorted list of tuples
     return [word for (word, count) in sorted(wcount.items(), key=lambda x:x[1], reverse=False)[:5]]
         
 
