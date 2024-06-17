@@ -11,7 +11,21 @@ def rare_words_finder(text):
         return []
     ## instead of returning tuples(word, count), should return just the words, extract word from sorted list of tuples
     return [word for (word, count) in sorted(wcount.items(), key=lambda x:x[1], reverse=False)[:5]]
-        
+
+def usingCounter(text):
+    if not text:
+        return []
+
+    # Convert the text to lowercase and remove punctuation
+    text = text.lower()
+    text = re.sub(r'[^\w\s]', '', text)
+    # Split the text into words and count the frequencies using Counter
+    word_counts = Counter(text.split())
+    # Get the words sorted by their frequency in ascending order
+    sorted_words = sorted(word_counts.items(), key=lambda x: x[1])
+    # Extract just the words with the lowest counts
+    rare_words = [word for word, count in sorted_words[:5]]
+    return rare_words      
 
 print(rare_words_finder("Hey there hot shot Are you ready for a challenge This might be trickier than it looks")) # Expected Output: [('hey', 1), ('there', 1), ('hot', 1), ('shot', 1), ('are', 1)]
 
