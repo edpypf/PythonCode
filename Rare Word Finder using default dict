@@ -1,0 +1,18 @@
+import re
+from collections import defaultdict
+
+def rare_words_finder(text):
+    # implement this
+    result=[]
+    output=defaultdict(int)
+    
+    for word in text.split():
+        w=word.lower()
+        output[w]+=1
+    return sorted(output.items(), key=lambda x:x[1], reverse=False)[:5]
+    
+print(rare_words_finder("Hey there hot shot Are you ready for a challenge This might be trickier than it looks")) # Expected Output: [('hey', 1), ('there', 1), ('hot', 1), ('shot', 1), ('are', 1)]
+
+print(rare_words_finder("The quick brown fox jumps over the lazy dog The fox is quick but the dog is lazy")) # Expected Output: [('brown', 1), ('jumps', 1), ('over', 1), ('but', 1), ('is', 2)]
+
+print(rare_words_finder("")) # Expected Output: []
