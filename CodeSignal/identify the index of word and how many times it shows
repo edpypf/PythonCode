@@ -3,9 +3,9 @@ def keyword_index(docs):
     for doc_idx, doc in enumerate(docs):
         for word in doc.split():
             if word in index:
-                index[word].append(doc_idx)
+                index[word][doc_idx]=index[word].get(doc_idx, 0)+1
             else:
-                index[word]=[doc_idx]
+                index[word]={doc_idx:1}
     return index     
                 
 docs = ["Hello world", "world of python", "python is a snake"]
