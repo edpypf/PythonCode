@@ -1,0 +1,13 @@
+def elect_board_member(votes):
+    # implement this
+    vcount={}
+    for v in votes:
+        vcount[v]=vcount.get(v, 0)+1
+        if vcount[v]>len(votes)//3:
+            return v
+    return -1
+        
+
+print(elect_board_member([1, 2, 3, 3, 3]))  # Expected output: 3
+print(elect_board_member([1, 2, 3, 4, 5]))  # Expected output: -1
+print(elect_board_member([1, 1, 1, 2, 2, 3, 3, 3]))  # Expected output: 1
