@@ -1,0 +1,18 @@
+def factorial(num):
+    # implement this
+    fac_cache={}
+    if num<0:
+        return 'Error'
+    if num<1:
+        return 1
+    else:
+        if num not in fac_cache:
+            fac_cache[num] = num * factorial(num-1)
+    return fac_cache[num]
+
+def factorials(nums):
+    return [factorial(num) if factorial(num) is not None else 'Error' for num in nums]
+
+print(factorials([2, 3, 4])) # should print: [2, 6, 24]
+print(factorials([1, 5, 6])) # should print: [1, 120, 720]
+print(factorials([0, -3, 10])) # should print: [1, 'Error', 3628800]
