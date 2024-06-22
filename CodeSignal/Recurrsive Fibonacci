@@ -1,0 +1,32 @@
+def alt_fib(n):
+    # implement this
+    if n == 0:
+        return 2
+    if n == 1:
+        return 3
+    else:
+        return alt_fib(n-1)+alt_fib(n-2)
+        
+
+# Test the function with some values
+print(alt_fib(0))  # Expected output: 2
+print(alt_fib(1))  # Expected output: 3
+print(alt_fib(2))  # Expected output: 5
+print(alt_fib(3))  # Expected output: 8
+print(alt_fib(4))  # Expected output: 13
+print(alt_fib(5))  # Expected output: 21
+
+############# Sum even number using recursive call ######################3
+
+def recursiveSumEven(arr, idx=0):
+    # implement this
+    if idx==len(arr):
+        return 0
+    else:
+        if idx%2==0 and idx<=len(arr)-2:
+            return arr[idx]+recursiveSumEven(arr, idx+2)
+
+# Testing the function
+print(recursiveSumEven([1, 2, 3, 4, 5, 6])) # Expected output: 9
+print(recursiveSumEven([2, 3])) # Expected output: 2
+print(recursiveSumEven([])) # Expected output: 0
