@@ -26,3 +26,29 @@ if result is not None:
     print(f"Age of {age_query} is found at position {result} in the age list.")
 else:
     print(f"No profile is found with age {age_query}.")
+################################# My Code ###########################################
+# TODO: Given a sorted list of grades in a class, implement Binary Search on this list
+grades = [35, 42, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
+
+# TODO: Implement the Loop-based Binary Search function without recursion
+def loop_binary_search(grades, target):
+    low=0
+    high=len(grades)
+    while high>low:
+        mid=(high+low)//2
+        if grades[mid]>target:
+            high=mid
+        elif grades[mid]<target:
+            low=mid
+        else: 
+            return low
+        
+# TODO: Set a query for a student's grade for your search
+pos = loop_binary_search(grades, 75)
+
+# TODO: Invoke the Binary Search function. If you find the grade, print the position in the grade list; if not, print a not found message.
+if pos is not None:
+    print(f'the position of student grade: ', pos)
+else:
+    print(f'Not found')
+
