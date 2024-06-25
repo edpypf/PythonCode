@@ -1,0 +1,17 @@
+from random import randint
+
+class Dice:
+    def __init__(self, sides=6):
+        # TODO: store the `sides` parameter in a class attribute
+        self.sides = sides
+
+    # Method to simulate dice roll
+    def roll(self):
+        # TODO: return a random number from 1 to `self.sides`
+        return randint(1, self.sides)
+
+# TODO: Create an instance of the Dice class with default sides
+MyDice = Dice(8)
+    
+# TODO: Roll the dice and print the result with a descriptive message
+print(MyDice.roll())
