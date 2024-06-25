@@ -87,6 +87,27 @@ print(name.name)
 name.name='Price'
 del name.name
 
+## using class method to create the descriptor
+##################################################################
+class Descriptors:
+    def __init__(self, x=''):
+        self.x = x
+    def __get__(self, object, objtype):
+        return '{} for {}'.format(self.x, self.x)
+    def __set__(self, obj, x):
+        if isinstance(x, str):
+            self.x=x
+        else:
+            raise TypeError("X should always be a string") 
+
+class Person:
+    ## here directly assign descriptor to the attribute itself, will apply all checking and get, set, delete on that attribute
+    ###***************####
+    x = Descriptors()
+
+y = Person()
+y.x='John'
+print(y.x)
 
 
 
