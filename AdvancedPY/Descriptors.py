@@ -68,10 +68,10 @@ class Person:
         return self._name
 
     def setName(self, name):
-        print('Setting the name to : '+ self.name)
+        print('Setting the name to : '+ name)
         self._name = name
 
-    def delName(self, name):
+    def delName(self):
         print('Deleting the name')
         del self._name
 
@@ -86,6 +86,7 @@ name = Person('John')
 print(name.name)
 name.name='Price'
 del name.name
+
 
 ## using class method to create the descriptor
 ##################################################################
@@ -109,5 +110,28 @@ y = Person()
 y.x='John'
 print(y.x)
 
+## using @Property to create the descriptor
+##################################################################
+class Person:
+    def __init__(self, name):
+        self._name = name
+    
+    @property
+    def name(self):
+        print('Getting the Name')
+        return self._name
 
+    @name.setter
+    def name(self, name):
+        print('Setting the name to : '+ name)
+        self._name = name
 
+    @name.deleter
+    def delName(self):
+        print('Deleting the name')
+        del self._name
+
+x = Person("John")        
+print(x.name)
+x.name='Price'
+del x.name
