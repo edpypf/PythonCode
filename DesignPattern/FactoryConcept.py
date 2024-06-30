@@ -41,18 +41,18 @@ class Point:
     '''and basically you can move the whole PointFactory inside of Point class
     and then calling it using: Point.PointFactory.new_polar_point(1,2)'''
     class PointFactory:
-        # @staticmethod
         def new_cartesian_point(self, x, y):
             p = Point()
             p.x = x
             p.y = y
             return p
 
-        @staticmethod
         def new_polar_point(self, rho, theta):
             return Point(rho * cos(theta), rho * sin(theta))
 
+factory = PointFactory()
+
 if __name__ == '__main__':
     p = Point(2, 3)
-    p2 = Point.PointFactory.new_polar_point(1, 2)
+    p2 = Point.factory.new_polar_point(1, 2)
     print(p, p2)
