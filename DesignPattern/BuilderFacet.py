@@ -18,6 +18,7 @@ class Person:
 class PersonBuilder:  # facade
     def __init__(self, person=None):
         if person is None:
+            # **************this is important that an empty person is created for other builder to use**************
             self.person = Person()
         else:
             self.person = person
