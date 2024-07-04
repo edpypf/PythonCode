@@ -9,6 +9,8 @@ def time_it(func):
         return result
     return wrapper
 
+# if you want to apply time_it whenever calling some_op, you can use @ decorator
+@time_it
 def some_op():
     print('Starting op')
     time.sleep(1)
@@ -20,4 +22,6 @@ if __name__ == "__main__":
     # the parentheses () after time_it(some_op) are used to call the function returned by time_it(some_op).
     time_it(some_op)()
 
-    
+    # if you want to apply time_it whenever calling some_op, you can use @ decorator
+    # add @time_it before the "def some_op()"
+    some_op()
