@@ -1,3 +1,16 @@
+#########################################33333
+Traceback (most recent call last):
+  File "c:\Users\edpyp\Downloads\test.py", line 59, in <module>
+    t.test_exercise()
+  File "c:\Users\edpyp\Downloads\test.py", line 48, in test_exercise
+    self.assertEqual('too young', rp.drive())
+  File "c:\Users\edpyp\Downloads\test.py", line 35, in drive
+    self.person = Person(self.age)
+  File "c:\Users\edpyp\Downloads\test.py", line 22, in age
+    return self.person.age
+AttributeError: 'NoneType' object has no attribute 'age'
+################################################################3
+
 from unittest import TestCase
 
 class Person:
