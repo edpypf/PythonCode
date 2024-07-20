@@ -68,14 +68,7 @@ The Template pattern fits for the situation of : **creating a fixed sequence of 
 ## StrategyPattern  
 The Strategy Pattern is used to define a family of algorithms, encapsulate each one, and make them interchangeable. It allows the client to select an algorithm at runtime.
 The Strategy pattern fits for the situation of : **a list of option methods can be provided, and up to client to choose at runtime**
-[Strategy Pattern - Payment Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
-- **Element Interface**: (Employee): Declares the accept method.
-- **Concrete Element**: (Engineer, Manager): Implement the accept method to accept a visitor and call the appropriate visit method.
-- **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
-- **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
-        print(f'Turn {self.turn} taken.')
-        self.turn += 1
-
-    @property
-    def winning_player(self):
-        return 'Player 1'  # Example static winner
+[Strategy Pattern - Payment Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/StrategyPayment.py)
+- **Strategy Interface**: (PaymentStrategy): base class with ABC, abstractmethod.
+- **Concrete Strategies**: (CreditCardPayment, PayPalPayment): Each concrete strategy provides a element and derived method(same name) on top of base class
+- **Context**: (ShopperingCart--> set_payment_strategy): Defines methods for visiting engineers and managers.
