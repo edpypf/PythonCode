@@ -1,9 +1,9 @@
+
+# Design Patter
+
+![Project Logo](PythonCode/images/logo.png)
+
 Design Patter is used in OOP programming, this page listed all the patterns, logic and example code, here's the index of it.
-# Project Title
-
-![Project Logo](path/to/logo.png)
-
-A brief description of what this project does and who it's for.
 
 ## Table of Contents
 
