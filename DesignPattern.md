@@ -70,4 +70,3 @@ The Template pattern fits for the situation of : **creating a fixed sequence of 
     @property
     def winning_player(self):
         return 'Player 1'  # Example static winner
-```
