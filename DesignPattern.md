@@ -26,7 +26,7 @@ The visitor pattern fits for the situation of : **Hierarchy of elements X multi 
 
 ## Template Pattern 
 define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. 
-- [Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
+[Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
 - **Template Method**: (Employee): **Abstract Class** typically consists of a sequence of method calls, including both concrete and abstract methods. <ABC, abstractmethod, > for **Primitive Operaations**
   ```class Game(ABC):
     def run(self):
