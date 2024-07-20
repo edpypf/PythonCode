@@ -20,7 +20,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 - **Concrete Element**: (Engineer, Manager): Implement the accept method to accept a visitor and call the appropriate visit method.
 - **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
 - **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
-
+![Visitor-Employee Hierarchy](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
 ```sh
 git clone https://github.com/your/repository.git
 cd repository
