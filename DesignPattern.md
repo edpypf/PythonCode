@@ -22,9 +22,8 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 - **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
 - [Visitor-Employee Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
 ```sh
-git clone https://github.com/your/repository.git
-cd repository
-npm install
+The visitor pattern fits for the situation of
+**Hierarchy of elements X multi features**
 ```
 ## template
 
