@@ -1,12 +1,18 @@
 # Design Pattern
 
 ![Project Logo](images/designPattern.png)
-
 Design Patter is used in OOP programming, this page listed all the patterns, logic and example code, here's the index of it.
 
-## List of Patterns
+# Pattern Category 🚀
+| Category       | Description                                                                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Creational     | to create objects in a manner suitable for the situation. solve design problem by controlling the object creation process                                    |
+| Structural     | deal with object composition, creating relationships between objects to form larger structures, ensure no impact to other part if one part of system changed |
+| Behavioral     | managing complex control flows in a system with algorithms and the assignment of responsibilities between objects                                            |
 
-- [Visitor Pattern](#VisitorPattern)
+## List of Patterns
+- [Creational](#creational)
+-- [Visitor Pattern](#VisitorPattern)
 - [Template](#template)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
@@ -35,12 +41,7 @@ npm install
 ![Build Status](https://img.shields.io/github/workflow/status/your/repository/CI)
 ![License](https://img.shields.io/github/license/your/repository)
 ```
-# Project Title 🚀
-| Feature        | Description                        |
-| -------------- | ---------------------------------- |
-| Feature 1      | Description of feature 1           |
-| Feature 2      | Description of feature 2           |
-| Feature 3      | Description of feature 3           |
+
 
 
 ## Features ✨
