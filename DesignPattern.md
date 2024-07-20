@@ -24,26 +24,12 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 
 The visitor pattern fits for the situation of : **Hierarchy of elements X multi features**
 
-## template
+## Template Pattern 
+define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. 
+- **Element Interface**: (Employee): Declares the accept method.
+- **Concrete Element**: (Engineer, Manager): Implement the accept method to accept a visitor and call the appropriate visit method.
+- **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
+- **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
+- [Visitor-Employee Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
 
-Instructions for setting up the project locally.
-
-```sh
-git clone https://github.com/your/repository.git
-cd repository
-npm install
-
-```markdown
-![Visitor-Employee Hierarchy](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
-![License](https://img.shields.io/github/license/your/repository)
-```
-
-
-
-## Features ✨
-
-- Feature 1 🎉
-- Feature 2 🚀
-- Feature 3 🛠
-
- 
+The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
