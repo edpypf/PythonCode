@@ -80,5 +80,5 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 - **State Enum**: (tcp state): base class with ABC, abstractmethod.
 - **State Interface**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
 - **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
-- **Context**: (ShopperingCart--> set_payment_strategy): Manages the current state using a dictionary of states.
+- **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
 ```In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
