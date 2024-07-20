@@ -11,8 +11,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 | Behavioral     | managing complex control flows in a system with algorithms and the assignment of responsibilities between objects                                            |
 
 ## List of Patterns
-- [Creational](#creational)
--- [Visitor Pattern](#VisitorPattern)
+-  Creational Patterns：- [Visitor Pattern](#VisitorPattern)
 - [Template](#template)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
