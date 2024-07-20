@@ -26,10 +26,30 @@ The visitor pattern fits for the situation of : **Hierarchy of elements X multi 
 
 ## Template Pattern 
 define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. 
-- **Element Interface**: (Employee): Declares the accept method.
+- **Template Method**: (Employee): It typically consists of a sequence of method calls, including both concrete and abstract methods.
+  ```class Game(ABC):
+    def run(self):
+        self.start()
+        while not self.have_winner:
+            self.take_turn()
+        print(f'Player {self.winning_player} wins!')
+
+    @abstractmethod
+    def start(self): pass
+
+    @property
+    @abstractmethod
+    def have_winner(self): pass
+
+    @abstractmethod
+    def take_turn(self): pass
+
+    @property
+    @abstractmethod
+    def winning_player(self): pass```
 - **Concrete Element**: (Engineer, Manager): Implement the accept method to accept a visitor and call the appropriate visit method.
 - **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
 - **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
-- [Visitor-Employee Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
+- [Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
 
 The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
