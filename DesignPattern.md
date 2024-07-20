@@ -26,7 +26,7 @@ The visitor pattern fits for the situation of : **Hierarchy of elements X multi 
 
 ## Template Pattern 
 define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. 
-- **Template Method**: (Employee): It typically consists of a sequence of method calls, including both concrete and abstract methods.
+- **Template Method**: (Employee): **Abstract Class** typically consists of a sequence of method calls, including both concrete and abstract methods. <ABC, abstractmethod, > for **Primitive Operaations**
   ```class Game(ABC):
     def run(self):
         self.start()
@@ -47,9 +47,29 @@ define the skeleton of an algorithm in a base class but allows subclasses to pro
     @property
     @abstractmethod
     def winning_player(self): pass```
-- **Concrete Element**: (Engineer, Manager): Implement the accept method to accept a visitor and call the appropriate visit method.
-- **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
-- **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
+- **Concrete Class**: (Chess):  It customizes the behavior of the algorithm by providing specific details for some of the steps in the subclass.
+  ```
+  class Chess(Game):
+    def __init__(self):
+        super().__init__()
+        self.max_turns = 10
+        self.turn = 1
+
+    def start(self):
+        print('Starting a game of chess.')
+
+    @property
+    def have_winner(self):
+        return self.turn > self.max_turns
+
+    def take_turn(self):
+        print(f'Turn {self.turn} taken.')
+        self.turn += 1
+
+    @property
+    def winning_player(self):
+        return 'Player 1'  # Example static winner
+```
 - [Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
 
 The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
