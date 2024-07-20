@@ -22,3 +22,31 @@ Instructions for setting up the project locally.
 git clone https://github.com/your/repository.git
 cd repository
 npm install
+
+## VisitorPattern
+
+Instructions for setting up the project locally.
+
+```sh
+git clone https://github.com/your/repository.git
+cd repository
+npm install
+
+```markdown
+![Build Status](https://img.shields.io/github/workflow/status/your/repository/CI)
+![License](https://img.shields.io/github/license/your/repository)
+
+| Feature        | Description                        |
+| -------------- | ---------------------------------- |
+| Feature 1      | Description of feature 1           |
+| Feature 2      | Description of feature 2           |
+| Feature 3      | Description of feature 3           |
+
+# Project Title 🚀
+
+## Features ✨
+
+- Feature 1 🎉
+- Feature 2 🚀
+- Feature 3 🛠
+
