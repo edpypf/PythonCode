@@ -71,4 +71,4 @@ define the skeleton of an algorithm in a base class but allows subclasses to pro
     def winning_player(self):
         return 'Player 1'  # Example static winner
 ```
-The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
+-- The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
