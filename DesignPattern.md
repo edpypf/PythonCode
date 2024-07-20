@@ -16,11 +16,10 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 -  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#template) - [Strategy](#strategy) - [State](#state) - [observer](#observer) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
 
 ## VisitorPattern
-- Element Interface: Declares an accept method that takes a visitor object.
-- Concrete Element: Implements the accept method.
-- Visitor Interface: Declares a visit method for each type of concrete element.
-- Concrete Visitor: Implements the visitor methods for each type of concrete element.
-
+- **Element Interface**: (Employee): Declares the accept method.
+- **Concrete Element**: (Engineer, Manager): Implement the accept method to accept a visitor and call the appropriate visit method.
+- **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
+- **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
 
 ```sh
 git clone https://github.com/your/repository.git
