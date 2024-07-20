@@ -13,7 +13,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 ## List of Patterns
 -  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
 -  Structural Patterns：- [Adapter](#adapter) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
--  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#template pattern) - [Strategy](#StrategyPattern) - [State](#state) - [observer](#observer) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
+-  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#state) - [observer](#observer) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
 
 ## VisitorPattern  
 The visitor pattern fits for the situation of : **Hierarchy of elements X multi features**
@@ -23,7 +23,7 @@ The visitor pattern fits for the situation of : **Hierarchy of elements X multi 
 - **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
 - **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
 
-## Template Pattern 
+## TemplatePattern 
 define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. 
 The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
 [Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
