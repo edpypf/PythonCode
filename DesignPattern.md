@@ -11,7 +11,11 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 | Behavioral     | managing complex control flows in a system with algorithms and the assignment of responsibilities between objects                                            |
 
 ## List of Patterns
--  Creational Patterns：- [Visitor](#VisitorPattern) - [Template](#template) - [Strategy](#strategy) - [State](#state) - [observer](#observer) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter)
+-  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
+-  Structural Patterns：- [Adapter](#adapter) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
+-  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#template) - [Strategy](#strategy) - [State](#state) - [observer](#observer) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
+
+
 
 ## VisitorPattern
 
