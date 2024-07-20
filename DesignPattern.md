@@ -16,16 +16,16 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 -  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#template) - [Strategy](#strategy) - [State](#state) - [observer](#observer) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
 
 ## VisitorPattern  
+The visitor pattern fits for the situation of : **Hierarchy of elements X multi features**
 [Visitor-Employee Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
 - **Element Interface**: (Employee): Declares the accept method.
 - **Concrete Element**: (Engineer, Manager): Implement the accept method to accept a visitor and call the appropriate visit method.
 - **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
 - **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
 
-The visitor pattern fits for the situation of : **Hierarchy of elements X multi features**
-
 ## Template Pattern 
 define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. 
+The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
 [Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
 - **Template Method**: (Employee): **Abstract Class** typically consists of a sequence of method calls, including both concrete and abstract methods. <ABC, abstractmethod, > for **Primitive Operaations**
   ```class Game(ABC):
@@ -71,4 +71,3 @@ define the skeleton of an algorithm in a base class but allows subclasses to pro
     def winning_player(self):
         return 'Player 1'  # Example static winner
 ```
--- The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
