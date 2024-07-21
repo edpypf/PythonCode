@@ -83,11 +83,17 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 - **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
 ```In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
 ## ObserverPattern  
-The State Pattern allows an object to change its behavior when its internal state changes. Instead of managing state transitions within a single class, the State Pattern delegates this responsibility to state-specific classes.
-Fits situation of : **It is useful for objects that need to exhibit different behaviors based on their current state.**
+Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
+Fits situation of : **used in scenarios where changes in one object need to be propagated to one or more dependent objects, such as in GUI frameworks, event handling systems, and real-time data updates.**
 [Property Observer - Age for Vote Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_dependencies_age.py), [Property Observer - Age for drive Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_observers.py)
 - **State Enum**: (tcp state): base class with ABC, abstractmethod.
 - **State Interface**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
 - **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
 - **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
-```In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
+- Advantages
+Decoupling: The observer pattern promotes loose coupling between the subject and the observers.
+Flexibility: Observers can be added or removed at runtime.
+Reusability: The same observer can be used with different subjects.
+- Disadvantages
+Memory Leaks: If observers are not properly removed, they can cause memory leaks.
+Complexity: The pattern can add complexity to the system due to the need for managing multiple observers and their notifications.
