@@ -13,7 +13,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 ## List of Patterns
 -  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
 -  Structural Patterns：- [Adapter](#adapter) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
--  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#observer) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
+-  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#memento) - [Mediator](#mediator) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
 
 ## VisitorPattern  
 The visitor pattern fits for the situation of : **Hierarchy of elements X multi features**
@@ -77,6 +77,15 @@ The Strategy pattern fits for the situation of : **a list of option methods can 
 The State Pattern allows an object to change its behavior when its internal state changes. Instead of managing state transitions within a single class, the State Pattern delegates this responsibility to state-specific classes.
 Fits situation of : **It is useful for objects that need to exhibit different behaviors based on their current state.**
 [State TCP Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/StateTCP.py), [State Manual Phone Script using Enum](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/StatePhoneManual.py)
+- **State Enum**: (tcp state): base class with ABC, abstractmethod.
+- **State Interface**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
+- **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
+- **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
+```In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
+## ObserverPattern  
+The State Pattern allows an object to change its behavior when its internal state changes. Instead of managing state transitions within a single class, the State Pattern delegates this responsibility to state-specific classes.
+Fits situation of : **It is useful for objects that need to exhibit different behaviors based on their current state.**
+[Property Observer - Age for Vote Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_dependencies_age.py), [Property Observer - Age for drive Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_observers.py)
 - **State Enum**: (tcp state): base class with ABC, abstractmethod.
 - **State Interface**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
 - **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
