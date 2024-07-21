@@ -97,7 +97,67 @@ Reusability: The same observer can be used with different subjects.
 - **Disadvantages**
 Memory Leaks: If observers are not properly removed, they can cause memory leaks.
 Complexity: The pattern can add complexity to the system due to the need for managing multiple observers and their notifications.
-```Subject and Observer
+- **Event based observer**
+'''class Event(list):
+    def __call__(self, *args, **kwargs):
+        for item in self:
+            item(*args, **kwargs)
+
+# Observer interface
+class Observer:
+    def update(self, event_data):
+        pass
+
+# Concrete Observer
+class ConcreteObserver(Observer):
+    def __init__(self, name):
+        self._name = name
+
+    def update(self, event_data):
+        print(f'{self._name} received event: {event_data}')
+
+# Subject with custom event
+class Subject:
+    def __init__(self):
+        self._event = Event()
+
+    def attach(self, observer):
+        self._event.append(observer.update)
+
+    def detach(self, observer):
+        self._event.remove(observer.update)
+
+    def generate_event(self, event_data):
+        print(f'Generating event: {event_data}')
+        self._event(event_data)
+
+# Usage
+subject = Subject()
+
+observer1 = ConcreteObserver("Observer1")
+observer2 = ConcreteObserver("Observer2")
+
+subject.attach(observer1)
+subject.attach(observer2)
+
+subject.generate_event("Event 1")
+subject.generate_event("Event 2")
+
+- **Classic Observer**
+```# Observer interface
+class Observer:
+    def update(self, event_data):
+        pass
+
+# Concrete Observer
+class ConcreteObserver(Observer):
+    def __init__(self, name):
+        self._name = name
+
+    def update(self, event_data):
+        print(f'{self._name} received event: {event_data}')
+
+# Subject
 class Subject:
     def __init__(self):
         self._observers = []
@@ -108,37 +168,16 @@ class Subject:
     def detach(self, observer):
         self._observers.remove(observer)
 
-    def notify(self):
+    def notify(self, event_data):
         for observer in self._observers:
-            observer.update(self)
+            observer.update(event_data)
 
-class Observer:
-    def update(self, subject):
-        pass
-
-class ConcreteSubject(Subject):
-    def __init__(self):
-        super().__init__()
-        self._state = None
-
-    @property
-    def state(self):
-        return self._state
-
-    @state.setter
-    def state(self, value):
-        self._state = value
-        self.notify()
-
-class ConcreteObserver(Observer):
-    def __init__(self, name):
-        self._name = name
-
-    def update(self, subject):
-        print(f'Observer {self._name} has been notified. New state is {subject.state}')
+    def generate_event(self, event_data):
+        print(f'Generating event: {event_data}')
+        self.notify(event_data)
 
 # Usage
-subject = ConcreteSubject()
+subject = Subject()
 
 observer1 = ConcreteObserver("Observer1")
 observer2 = ConcreteObserver("Observer2")
@@ -146,6 +185,5 @@ observer2 = ConcreteObserver("Observer2")
 subject.attach(observer1)
 subject.attach(observer2)
 
-subject.state = "New State 1"
-subject.state = "New State 2"
-
+subject.generate_event("Event 1")
+subject.generate_event("Event 2")
