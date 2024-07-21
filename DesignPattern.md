@@ -86,14 +86,66 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
 Fits situation of : **used in scenarios where changes in one object need to be propagated to one or more dependent objects, such as in GUI frameworks, event handling systems, and real-time data updates.**
 [Property Observer - Age for Vote Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_dependencies_age.py), [Property Observer - Age for drive Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_observers.py)
-- **State Enum**: (tcp state): base class with ABC, abstractmethod.
-- **State Interface**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
-- **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
-- **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
-- Advantages
+- **Subject Interface**: (tcp state): base class with ABC, abstractmethod.
+- **Concrete Subject**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
+- **Observer Interface**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
+- **Concrete Observer**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
+- **Advantages**
 Decoupling: The observer pattern promotes loose coupling between the subject and the observers.
 Flexibility: Observers can be added or removed at runtime.
 Reusability: The same observer can be used with different subjects.
-- Disadvantages
+- **Disadvantages**
 Memory Leaks: If observers are not properly removed, they can cause memory leaks.
 Complexity: The pattern can add complexity to the system due to the need for managing multiple observers and their notifications.
+```Subject and Observer
+class Subject:
+    def __init__(self):
+        self._observers = []
+
+    def attach(self, observer):
+        self._observers.append(observer)
+
+    def detach(self, observer):
+        self._observers.remove(observer)
+
+    def notify(self):
+        for observer in self._observers:
+            observer.update(self)
+
+class Observer:
+    def update(self, subject):
+        pass
+
+class ConcreteSubject(Subject):
+    def __init__(self):
+        super().__init__()
+        self._state = None
+
+    @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, value):
+        self._state = value
+        self.notify()
+
+class ConcreteObserver(Observer):
+    def __init__(self, name):
+        self._name = name
+
+    def update(self, subject):
+        print(f'Observer {self._name} has been notified. New state is {subject.state}')
+
+# Usage
+subject = ConcreteSubject()
+
+observer1 = ConcreteObserver("Observer1")
+observer2 = ConcreteObserver("Observer2")
+
+subject.attach(observer1)
+subject.attach(observer2)
+
+subject.state = "New State 1"
+subject.state = "New State 2"
+
