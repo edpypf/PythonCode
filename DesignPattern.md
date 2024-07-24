@@ -82,6 +82,7 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 - **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
 - **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
 ```In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
+
 ## ObserverPattern  
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
 Fits situation of : **used in scenarios where changes in one object need to be propagated to one or more dependent objects, such as in GUI frameworks, event handling systems, and real-time data updates.**
@@ -103,12 +104,12 @@ Complexity: The pattern can add complexity to the system due to the need for man
         for item in self:
             item(*args, **kwargs)
 
-# Observer interface
+```# Observer interface
 class Observer:
     def update(self, event_data):
         pass
 
-# Concrete Observer
+```# Concrete Observer
 class ConcreteObserver(Observer):
     def __init__(self, name):
         self._name = name
@@ -116,7 +117,7 @@ class ConcreteObserver(Observer):
     def update(self, event_data):
         print(f'{self._name} received event: {event_data}')
 
-# Subject with custom event
+```# Subject with custom event
 class Subject:
     def __init__(self):
         self._event = Event()
@@ -131,7 +132,7 @@ class Subject:
         print(f'Generating event: {event_data}')
         self._event(event_data)
 
-# Usage
+```# Usage
 subject = Subject()
 
 observer1 = ConcreteObserver("Observer1")
