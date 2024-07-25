@@ -86,7 +86,7 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 ## ObserverPattern  
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
 Fits situation of : **used in scenarios where changes in one object need to be propagated to one or more dependent objects, such as in GUI frameworks, event handling systems, and real-time data updates.**
-[Property Observer - Age for Vote Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_dependencies_age.py), [Property Observer - Age for drive Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_observers.py)
+[Property Observer - Age for Vote Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_dependencies_age.py), [Property Observer - Age for drive Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_observers.py), [Property Price Observer - Stock ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/PropertyObserver_Price_ChatGpt.py) 
 - **Subject Interface**: (tcp state): base class with ABC, abstractmethod.
 - **Concrete Subject**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
 - **Observer Interface**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
