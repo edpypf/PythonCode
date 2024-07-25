@@ -199,7 +199,7 @@ The Memento pattern fits for the situation of : **scenarios where maintaining an
 
 ## MediatorPattern  
 The Mediator pattern fits for the situation of : **scenarios where multiple objects need to communicate in a complex manner, and to maintain a clean and decoupled architecture.**
-[Mediator-Chatroom Example Script]((https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatRoom.py) | [Mediator-with Event Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorWithEvent.py) | [Mediator-Chatroom ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatroom_ChatGpt.py)
+[Mediator-Chatroom Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatRoom.py) | [Mediator-with Event Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorWithEvent.py) | [Mediator-Chatroom ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatroom_ChatGpt.py)
 - **Mediator**: (ABC used by chatroom): Defines an interface for communication between Colleague objects..
 - **ConcreteMediator**: (chatroom): the Mediator interface and coordinates communication between Colleague objects.
 - **Users**: (colleague):Represents a user in the chat room. It communicates with other users through the ChatRoom mediator.
