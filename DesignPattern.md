@@ -206,20 +206,33 @@ The Mediator pattern fits for the situation of : **scenarios where multiple obje
 - **Drawback**: **Mediator Complexity**: The mediator can become a complex, monolithic class as it handles more interactions and behavior. **Single Point of Failure**: The mediator is a central component; if it fails, the whole system’s communication may be disrupted.
 
 ## command  
-The Mediator pattern fits for the situation of : **scenarios where multiple objects need to communicate in a complex manner, and to maintain a clean and decoupled architecture.**
-[Mediator-Chatroom Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatRoom.py) | [Mediator-with Event Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorWithEvent.py) | [Mediator-Chatroom ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatroom_ChatGpt.py)
-- **Mediator**: (ABC used by chatroom): Defines an interface for communication between Colleague objects..
-- **ConcreteMediator**: (chatroom): the Mediator interface and coordinates communication between Colleague objects.
-- **Users**: (colleague):Represents a user in the chat room. It communicates with other users through the ChatRoom mediator.
-- **Drawback**: **Mediator Complexity**: The mediator can become a complex, monolithic class as it handles more interactions and behavior. **Single Point of Failure**: The mediator is a central component; if it fails, the whole system’s communication may be disrupted.
+The Command pattern fits for the situation of : **encapsulates requests as objects, allowing for parameterization, queuing, logging, and support for undoable operations, thereby decoupling the sender from the receiver of the request.**
+[Basic Command Example](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/BankAccountCommand_basic.py) | [Composite Command Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/CompositeCommand.py) | [Command TextEditor ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Command_TextEdit_Chatgpt.py)
+- **Command Interface**: (ABC,abstractmethod for execute/undo methods)
+- **ConcreteCommand**: (TypeTextCommand, DeleteTextCommand): concrete implementations of the Command interface. They each perform specific actions on a TextEditor object and can undo those actions.
+- **Invoker**: (TextEditorInvoker):invoker class that stores commands and handles execution, undo, and redo operations.
+- **Context or Client**:  The client code creates instances of the TextEditor and command classes, assigns them to the invoker, and triggers their execution, undo, and redo operations.
 
 ## chainofresponsibility
-The Mediator pattern fits for the situation of : **scenarios where multiple objects need to communicate in a complex manner, and to maintain a clean and decoupled architecture.**
-[Mediator-Chatroom Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatRoom.py) | [Mediator-with Event Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorWithEvent.py) | [Mediator-Chatroom ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatroom_ChatGpt.py)
-- **Mediator**: (ABC used by chatroom): Defines an interface for communication between Colleague objects..
-- **ConcreteMediator**: (chatroom): the Mediator interface and coordinates communication between Colleague objects.
-- **Users**: (colleague):Represents a user in the chat room. It communicates with other users through the ChatRoom mediator.
-- **Drawback**: **Mediator Complexity**: The mediator can become a complex, monolithic class as it handles more interactions and behavior. **Single Point of Failure**: The mediator is a central component; if it fails, the whole system’s communication may be disrupted.
+The Chain of Responsibility pattern fits for the situation of : **allows multiple objects to handle a request in a sequential chain, decoupling the sender from the receiver and enabling each handler to process the request or pass it to the next handler.**
+[Chain Basic Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainMethod.py) | [ChainOR Broker Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Chain_Broker.py) | [ChainOR_Support ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainOfResponsibility_ChatGpt.py)
+- **EventCaller**: __call__ for item in self: item(*args, **kwargs)
+- **Handler Interface**: (CreatureModifier): Base class for all handlers, This class registers itself with the Game's queries event, defines a abstract method 'handle', __exit__ to remove the queries 
+- **ConcreteHandler**: (DoubleAttackModifier; IncreaseDefenseModifier): modify the query based on specific conditions.
+- **Request**: (Query) represents a request that contains the information needed to perform the action (e.g., creature_name, what_to_query, default_value).
+- **Chain**: (list of handlers): Handlers are added to the Game's queries event, forming a chain.  Each handler can either handle the query or pass it to the next handler in the chain. When perform_query is called, it triggers all handlers in the chain.
+- **Usage**:
+  ```if __name__ == '__main__':
+    game = Game()
+    goblin = Creature(game, 'Strong Goblin', 2, 2)
+    print(goblin)  # Initial state
+
+    with DoubleAttackModifier(game, goblin):
+        print(goblin)  # Attack doubled
+
+        with IncreaseDefenseModifier(game, goblin):
+            print(goblin)  # Attack doubled and defense increased
+    print(goblin)  # Back to initial state
 
 ## interpreter
 The Mediator pattern fits for the situation of : **scenarios where multiple objects need to communicate in a complex manner, and to maintain a clean and decoupled architecture.**
