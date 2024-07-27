@@ -256,4 +256,4 @@ The Iterator pattern fits for the situation of : **scenarios where you need to p
 - **Object Class**: (Order): Represents a customer order with attributes like order_id, customer_name, and total_amount.
 - **Iterator Class**: (OrderIterator): Implements the iterator pattern to allow sequential access to orders in the collection. It handles the iteration logic and maintains the current index.providing the __next__() method to fetch the next order.
 - **Obj Collection**: (OrderCollection ): Manages a collection of orders and provides an iterator to traverse through them. exposes an iterator through __iter__().
-```When iterating over order_collection, the for loop uses the iterator to access each Order object. This separation allows the OrderCollection class to focus on managing the orders, while the OrderIterator class handles the iteration logic.
+When iterating over order_collection, the for loop uses the iterator to access each Order object. This separation allows the OrderCollection class to focus on managing the orders, while the OrderIterator class handles the iteration logic.
