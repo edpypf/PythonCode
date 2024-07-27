@@ -13,7 +13,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 ## List of Patterns
 -  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
 -  Structural Patterns：- [Adapter](#adapter) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
--  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#MementoPattern) - [Mediator](#MediatorPattern) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#iterator)
+-  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#MementoPattern) - [Mediator](#MediatorPattern) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#IteratorPattern)
 
 ## VisitorPattern  
 The visitor pattern fits for the situation of : **Hierarchy of elements X multi features**
@@ -250,10 +250,10 @@ Apply Discounts: For a total price of $60, apply the discounts to get the final 
 Flexibility: Easily add or modify discount rules without changing the core logic.
 Extensibility: Supports the addition of new types of discounts by implementing new expression classes.
 ```
-## MementoPattern  
-The Memento pattern fits for the situation of : **scenarios where maintaining and restoring object states is crucial, such as in undo/redo functionality in applications.**
-[Memento-Bank Balance Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalance.py) | [Memento-Bank Balances redo/undo Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalanceUndoRedo.py) | [Memento-TextEditor ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoTextEditor_ChatGpt.py)
-- **Memento**: (Memento): The Memento Pattern ensures that the state of an object is saved and restored without violating its encapsulation. The internal state is only accessible through the Memento, and only the Originator can create and use Mementos.
-- **Originator**: (TextEditor): The object whose state needs to be saved and restored.
-- **Caretaker**: (Caretaker): Defines undo and redo.
-- **Drawback**: Memory Overhead: Storing multiple Mementos can consume a significant amount of memory, especially if the state objects are large or if there are many states to save. Complexity: Implementing the Memento Pattern can add complexity to the code, particularly in managing the Caretaker and ensuring that Mementos are properly created and used.
+## IteratorPattern  
+The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
+[Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py)
+- **Object Class**: (Order): Represents a customer order with attributes like order_id, customer_name, and total_amount.
+- **Iterator Class**: (OrderIterator): Implements the iterator pattern to allow sequential access to orders in the collection. It handles the iteration logic and maintains the current index.providing the __next__() method to fetch the next order.
+- **Obj Collection**: (OrderCollection ): Manages a collection of orders and provides an iterator to traverse through them. exposes an iterator through __iter__().
+```When iterating over order_collection, the for loop uses the iterator to access each Order object. This separation allows the OrderCollection class to focus on managing the orders, while the OrderIterator class handles the iteration logic.
