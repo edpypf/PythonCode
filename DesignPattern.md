@@ -241,19 +241,11 @@ The Mediator pattern fits for the situation of : **Configurable systems where be
 - **Concrete EXpressions**: (PercentageDiscount, FlatDiscount): Concrete classes for specific discount types 
 - **How it works**: (main):Represents a user in the chat room. It communicates with other users through the ChatRoom mediator.
  ```Define Rules: Create concrete discount expressions (e.g., PercentageDiscount, FlatDiscount, ConditionalDiscount).
-Apply Rules: Sequentially apply these discount expressions to the total price. Each discount modifies the price according to its specific rule.
+**Apply Rules**: Sequentially apply these discount expressions to the total price. Each discount modifies the price according to its specific rule.
 Evaluate Final Price: After applying all discount expressions, compute and return the final price.
 Example:
-Construct Discounts: Define discount rules such as a 10% discount, a $5 discount, and a conditional 20% discount if the total price exceeds $50.
+**Construct Discounts**: Define discount rules such as a 10% discount, a $5 discount, and a conditional 20% discount if the total price exceeds $50.
 Apply Discounts: For a total price of $60, apply the discounts to get the final price.
-Benefits:
+**Benefits**:
 Flexibility: Easily add or modify discount rules without changing the core logic.
 Extensibility: Supports the addition of new types of discounts by implementing new expression classes.
-
-## iterator
-The Mediator pattern fits for the situation of : **scenarios where multiple objects need to communicate in a complex manner, and to maintain a clean and decoupled architecture.**
-[Mediator-Chatroom Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatRoom.py) | [Mediator-with Event Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorWithEvent.py) | [Mediator-Chatroom ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatroom_ChatGpt.py)
-- **Mediator**: (ABC used by chatroom): Defines an interface for communication between Colleague objects..
-- **ConcreteMediator**: (chatroom): the Mediator interface and coordinates communication between Colleague objects.
-- **Users**: (colleague):Represents a user in the chat room. It communicates with other users through the ChatRoom mediator.
-- **Drawback**: **Mediator Complexity**: The mediator can become a complex, monolithic class as it handles more interactions and behavior. **Single Point of Failure**: The mediator is a central component; if it fails, the whole system’s communication may be disrupted.
