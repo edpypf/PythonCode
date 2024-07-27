@@ -233,7 +233,6 @@ The Chain of Responsibility pattern fits for the situation of : **allows multipl
         with IncreaseDefenseModifier(game, goblin):
             print(goblin)  # Attack doubled and defense increased
     print(goblin)  # Back to initial state
-
 ## interpreter
 The Mediator pattern fits for the situation of : **scenarios where multiple objects need to communicate in a complex manner, and to maintain a clean and decoupled architecture.**
 [Mediator-Chatroom Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatRoom.py) | [Mediator-with Event Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorWithEvent.py) | [Mediator-Chatroom ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatroom_ChatGpt.py)
