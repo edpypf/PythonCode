@@ -12,7 +12,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 
 ## List of Patterns
 -  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
--  Structural Patterns：- [Adapter](#AdapterPattern) - [Bridge](#BridgePattern) - [Composite](#CompositePattern) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
+-  Structural Patterns：- [Adapter](#AdapterPattern) - [Bridge](#BridgePattern) - [Composite](#CompositePattern) - [Flyweight](#FlyweightPattern) - [Decorator](#DecoratorPattern) - [Proxy](#ProxyPattern) - [Facade](#FacadePattern)
 -  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#MementoPattern) - [Mediator](#MediatorPattern) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#IteratorPattern)
 ## -----------------------------------<->**Behavioral** <-> **Behavioral** -----------------------------------
 ## VisitorPattern  
