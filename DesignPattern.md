@@ -326,9 +326,10 @@ The Decorator pattern fits for the situation of : **allows behavior to be added 
 - **Single Responsibility Principle**: Each decorator has a specific responsibility, adhering to the Single Responsibility Principle.
 - **Component and Concrete Component**: (Booking_Room): A the base interface or class and A class that implements the base interface or class.
 - **Decorator and Concrete Decorators**: (Logging, Authentication, Validation Decorator): base interface and contains a reference to a component. Classes that extend the decorator to add functionalities.
-- **Apply Decorators to the Base Function**: ``` Bash @log_decorator
-@auth_decorator
-@validate_decorator
-def book_room(room_type, customer_id):
-    print(f"Booking {room_type} for customer {customer_id}.")
+- **Apply Decorators to the Base Function**:
+  ``` Bash @log_decorator
+      @auth_decorator
+      @validate_decorator
+      def book_room(room_type, customer_id):
+        print(f"Booking {room_type} for customer {customer_id}.")
 - **@wraps(func)**: The @wraps(func) decorator from the functools module is used to preserve the original function's metadata (such as its name, docstring, and module) when it is wrapped by another function. This is crucial for accurate logging, debugging, and maintaining the integrity of the function's signature and documentation.
