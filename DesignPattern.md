@@ -265,7 +265,8 @@ The Adapter pattern fits for the situation of : **a powerful way to integrate di
 - **TargetInterface**: (DataStorage): The interface that the client expects and interacts with. DataStorage with a method save(data)
 - **Adaptee**: (SQLDatabase, NoSQLDatabase, and CloudStorage): The existing class with an incompatible interface. Different storage systems like SQLDatabase, NoSQLDatabase, and CloudStorage with different methods for storing data.
 - **Adapter**: (SQLDatabaseAdapter, NoSQLDatabaseAdapter, and CloudStorageAdapter): A class that implements the target interface and translates the client's requests into calls to the adaptee's methods. implement DataStorage and translate save calls to the respective methods of the storage systems.
-```# Define the Target Interface
+``` Bash
+# Define the Target Interface
 class TargetInterface:
     def method(self, param):
         pass
