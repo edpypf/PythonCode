@@ -107,12 +107,12 @@ class Event(list):
         for item in self:
             item(*args, **kwargs)
 
-# Observer interface
+--Observer interface**
 class Observer:
     def update(self, event_data):
         pass
 
-# Concrete Observer
+ --Concrete Observer**
 class ConcreteObserver(Observer):
     def __init__(self, name):
         self._name = name
@@ -120,7 +120,7 @@ class ConcreteObserver(Observer):
     def update(self, event_data):
         print(f'{self._name} received event: {event_data}')
 
-# Subject with custom event
+-- Subject with custom event
 class Subject:
     def __init__(self):
         self._event = Event()
@@ -135,7 +135,7 @@ class Subject:
         print(f'Generating event: {event_data}')
         self._event(event_data)
 
-# Usage
+-- Usage
 subject = Subject()
 
 observer1 = ConcreteObserver("Observer1")
@@ -149,12 +149,12 @@ subject.generate_event("Event 2")
 
 - **Classic Observer**
 ``` Bash
-# Observer interface
+-- Observer interface
 class Observer:
     def update(self, event_data):
         pass
 
-# Concrete Observer
+-- Concrete Observer
 class ConcreteObserver(Observer):
     def __init__(self, name):
         self._name = name
@@ -162,7 +162,7 @@ class ConcreteObserver(Observer):
     def update(self, event_data):
         print(f'{self._name} received event: {event_data}')
 
-# Subject
+-- Subject
 class Subject:
     def __init__(self):
         self._observers = []
@@ -181,7 +181,7 @@ class Subject:
         print(f'Generating event: {event_data}')
         self.notify(event_data)
 
-# Usage
+-- Usage
 subject = Subject()
 
 observer1 = ConcreteObserver("Observer1")
