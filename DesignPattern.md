@@ -107,12 +107,12 @@ class Event(list):
         for item in self:
             item(*args, **kwargs)
 
---Observer interface**
+-- Observer interface**
 class Observer:
     def update(self, event_data):
         pass
 
- --Concrete Observer**
+-- Concrete Observer**
 class ConcreteObserver(Observer):
     def __init__(self, name):
         self._name = name
