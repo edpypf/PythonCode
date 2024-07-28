@@ -318,9 +318,17 @@ The Composite pattern fits for the situation of : **represent a hierarchy of obj
 - **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
 - **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
 
-## CompositePattern  
-The Composite pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
-[Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
-- **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
-- **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
-- **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
+## DecoratorPattern  
+The Decorator pattern fits for the situation of : **allows behavior to be added to individual objects, either statically or dynamically, without affecting the behavior of other objects from the same class. It is typically used to adhere to the Single Responsibility Principle, allowing functionalities to be divided between classes with unique areas of concern.**
+[Decorator Basic Timeit Function Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Decorator_Function.py)| [Decorator Booking System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/DecoratorBookingSystem.py) | [Decorator Ordering Coffee Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/DecoratorCoffee.py)
+- **Dynamic Behavior Addition**: Adds responsibilities to objects at runtime.
+- **Composition over Inheritance**: Promotes composition instead of inheritance, providing greater flexibility in extending functionalities.
+- **Single Responsibility Principle**: Each decorator has a specific responsibility, adhering to the Single Responsibility Principle.
+- **Component and Concrete Component**: (Booking_Room): A the base interface or class and A class that implements the base interface or class.
+- **Decorator and Concrete Decorators**: (Logging, Authentication, Validation Decorator): base interface and contains a reference to a component. Classes that extend the decorator to add functionalities.
+- **Apply Decorators to the Base Function**: ``` Bash @log_decorator
+@auth_decorator
+@validate_decorator
+def book_room(room_type, customer_id):
+    print(f"Booking {room_type} for customer {customer_id}.")
+- **@wraps(func)**: The @wraps(func) decorator from the functools module is used to preserve the original function's metadata (such as its name, docstring, and module) when it is wrapped by another function. This is crucial for accurate logging, debugging, and maintaining the integrity of the function's signature and documentation.
