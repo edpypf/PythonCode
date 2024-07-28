@@ -12,7 +12,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 
 ## List of Patterns
 -  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
--  Structural Patterns：- [Adapter](#AdapterPattern) - [Bridge](#BridgePattern) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
+-  Structural Patterns：- [Adapter](#AdapterPattern) - [Bridge](#BridgePattern) - [Composite](#CompositePattern) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
 -  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#MementoPattern) - [Mediator](#MediatorPattern) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#IteratorPattern)
 ## -----------------------------------<->**Behavioral** <-> **Behavioral** -----------------------------------
 ## VisitorPattern  
@@ -310,4 +310,17 @@ The Bridge pattern fits for the situation of : **you can create a more flexible,
 
 ```Bash
 alert_notification_with_email = AlertNotification(email_sender); reminder_notification_with_sms = ReminderNotification(sms_sender)
+```
+## CompositePattern  
+The Composite pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
+[Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
+- **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
+- **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
+- **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
 
+## CompositePattern  
+The Composite pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
+[Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
+- **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
+- **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
+- **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
