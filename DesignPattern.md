@@ -15,7 +15,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 -  Structural Patterns：- [Adapter](#adapter) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
 -  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#MementoPattern) - [Mediator](#MediatorPattern) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#IteratorPattern)
 
-## VisitorPattern  
+## VisitorPattern  **Behavioral** <-> **Behavioral** <-> **Behavioral** <-> **Behavioral** <-> **Behavioral** <-> **Behavioral** <-> **Behavioral** <-> **Behavioral** <-> 
 The visitor pattern fits for the situation of : **Hierarchy of elements X multi features**
 [Visitor-Employee Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Visitor.py)
 - **Element Interface**: (Employee): Declares the accept method.
@@ -251,6 +251,14 @@ Flexibility: Easily add or modify discount rules without changing the core logic
 Extensibility: Supports the addition of new types of discounts by implementing new expression classes.
 ```
 ## IteratorPattern  
+The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
+[Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py)
+- **Object Class**: (Order): Represents a customer order with attributes like order_id, customer_name, and total_amount.
+- **Iterator Class**: (OrderIterator): Implements the iterator pattern to allow sequential access to orders in the collection. It handles the iteration logic and maintains the current index.providing the __next__() method to fetch the next order.
+- **Obj Collection**: (OrderCollection ): Manages a collection of orders and provides an iterator to traverse through them. exposes an iterator through __iter__().
+When iterating over order_collection, the for loop uses the iterator to access each Order object. This separation allows the OrderCollection class to focus on managing the orders, while the OrderIterator class handles the iteration logic.
+
+## IteratorPattern  **Structural** <-> **Structural** <-> **Structural** <-> **Structural** <-> **Structural** <-> **Structural** <-> **Structural** <-> 
 The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
 [Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py)
 - **Object Class**: (Order): Represents a customer order with attributes like order_id, customer_name, and total_amount.
