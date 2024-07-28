@@ -244,7 +244,9 @@ The Mediator pattern fits for the situation of : **Configurable systems where be
 - **Abstract Expressions**: (DiscountExpression): Abstract base class DiscountExpression for applying discounts.
 - **Concrete EXpressions**: (PercentageDiscount, FlatDiscount): Concrete classes for specific discount types 
 - **How it works**: (main):Represents a user in the chat room. It communicates with other users through the ChatRoom mediator.
- ```Define Rules: Create concrete discount expressions (e.g., PercentageDiscount, FlatDiscount, ConditionalDiscount).
+ ```Bash
+Define Rules: Create concrete discount expressions (e.g., PercentageDiscount, FlatDiscount, ConditionalDiscount).
+
 **Apply Rules**: Sequentially apply these discount expressions to the total price. Each discount modifies the price according to its specific rule.
 Evaluate Final Price: After applying all discount expressions, compute and return the final price.
 Example:
@@ -253,7 +255,7 @@ Apply Discounts: For a total price of $60, apply the discounts to get the final 
 **Benefits**:
 Flexibility: Easily add or modify discount rules without changing the core logic.
 Extensibility: Supports the addition of new types of discounts by implementing new expression classes.
- 
+ ```
 ## IteratorPattern  
 The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
 [Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py)
