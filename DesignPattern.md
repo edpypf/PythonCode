@@ -48,7 +48,8 @@ The Template pattern fits for the situation of : **creating a fixed sequence of 
 
     @property
     @abstractmethod
-    def winning_player(self): pass```
+    def winning_player(self): pass
+  ```
 - **Concrete Class**: (Chess):  It customizes the behavior of the algorithm by providing specific details for some of the steps in the subclass.
   ``` Bash
   class Chess(Game):
@@ -146,7 +147,7 @@ subject.attach(observer2)
 
 subject.generate_event("Event 1")
 subject.generate_event("Event 2")
-
+```
 - **Classic Observer**
 ``` Bash
 -- Observer interface
