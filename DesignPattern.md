@@ -335,15 +335,22 @@ The Decorator pattern fits for the situation of : **allows behavior to be added 
 - **@wraps(func)**: The @wraps(func) decorator from the functools module is used to preserve the original function's metadata (such as its name, docstring, and module) when it is wrapped by another function. This is crucial for accurate logging, debugging, and maintaining the integrity of the function's signature and documentation.
 
 ## ProxyPattern  
-The Flyweight pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
-[Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
-- **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
-- **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
-- **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
+The Proxy Pattern provides a surrogate or placeholder for another object to control access to it. The proxy object acts as an intermediary, adding a level of indirection to support various operations. Suitable for : **access control, lazy initialization, logging, or remote access**
+[Proxy_OnlinePayment System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyOnlinePaymentSystem.py) | [Proxy DB Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyDBConnection.py))
+- **Key Point**: 
+``` Bash
+Control Access: The proxy can control access to the real object, adding security or validation checks.
+Lazy Initialization: The proxy can delay the creation of the real object until it is needed.
+Logging/Monitoring: The proxy can log requests or perform other tasks before forwarding requests to the real object.
+Remote Proxy: The proxy can represent an object in a different address space, making remote method invocation possible.
+```
+- **Subject**: (Payment): An abstract base class defining the process_payment method.
+- **RealSubject**: (RealPayment): Implements the process_payment method to perform the actual payment processing.
+- **Proxy**: (PaymentProxy): Controls access to the RealPayment object. Adds authentication and logging functionalities.
 
 ## FlyweightPattern  
 The Flyweight pattern aims to reduce memory usage by sharing as much data as possible. Here’s how it’s applied in your code. Suitable for : **scenarios where there is a large number of objects that can share common data to save memory.**
-[Flyweight userName Searching Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_Reuse_Name_String.py) | [FlyWeight Doc Management System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyweightDocumentMgmtSystem.py) |[FlyWeight Text Formatting Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_CapChar.py)
+[Flyweight userName Searching Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_Reuse_Name_String.py) | [FlyWeight Doc Management System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyweightDocumentMgmtSystem.py) | [FlyWeight Text Formatting Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_CapChar.py)
 - **Flyweight Class**: (font, color): Represents shared state (e.g., font, color). Represents the shared state (font and color) of a word.
 - **Context Class**: (position): Represents unique state (e.g., position in the document). Ensures that flyweight instances are shared and reused to minimize memory usage.
 - **Flyweight Factory**: (Manager): Manages the creation and reuse of flyweight objects. Ensures that flyweight instances are shared and reused to minimize memory usage.
