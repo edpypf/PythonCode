@@ -12,7 +12,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 
 ## List of Patterns
 -  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
--  Structural Patterns：- [Adapter](#adapter) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
+-  Structural Patterns：- [Adapter](#AdapterPattern) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
 -  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#MementoPattern) - [Mediator](#MediatorPattern) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#IteratorPattern)
 ## -----------------------------------<->**Behavioral** <-> **Behavioral** -----------------------------------
 ## VisitorPattern  
@@ -257,11 +257,35 @@ The Iterator pattern fits for the situation of : **scenarios where you need to p
 - **Iterator Class**: (OrderIterator): Implements the iterator pattern to allow sequential access to orders in the collection. It handles the iteration logic and maintains the current index.providing the __next__() method to fetch the next order.
 - **Obj Collection**: (OrderCollection ): Manages a collection of orders and provides an iterator to traverse through them. exposes an iterator through __iter__().
 When iterating over order_collection, the for loop uses the iterator to access each Order object. This separation allows the OrderCollection class to focus on managing the orders, while the OrderIterator class handles the iteration logic.
+
 ## -------------------------------<-> **Structural** <-> **Structural** <-> -------------------------------
-## IteratorPattern    
-The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
-[Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py)
-- **Object Class**: (Order): Represents a customer order with attributes like order_id, customer_name, and total_amount.
-- **Iterator Class**: (OrderIterator): Implements the iterator pattern to allow sequential access to orders in the collection. It handles the iteration logic and maintains the current index.providing the __next__() method to fetch the next order.
-- **Obj Collection**: (OrderCollection ): Manages a collection of orders and provides an iterator to traverse through them. exposes an iterator through __iter__().
-When iterating over order_collection, the for loop uses the iterator to access each Order object. This separation allows the OrderCollection class to focus on managing the orders, while the OrderIterator class handles the iteration logic.
+## AdapterPattern    
+The Adapter pattern fits for the situation of : **a powerful way to integrate different systems and components, ensuring compatibility and enhancing the flexibility of your application.**
+[Adapter DB Save Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/AdapterDBSave.py)
+- **TargetInterface**: (DataStorage): The interface that the client expects and interacts with. DataStorage with a method save(data)
+- **Adaptee**: (SQLDatabase, NoSQLDatabase, and CloudStorage): The existing class with an incompatible interface. Different storage systems like SQLDatabase, NoSQLDatabase, and CloudStorage with different methods for storing data.
+- **Adapter**: (SQLDatabaseAdapter, NoSQLDatabaseAdapter, and CloudStorageAdapter): A class that implements the target interface and translates the client's requests into calls to the adaptee's methods. implement DataStorage and translate save calls to the respective methods of the storage systems.
+```# Define the Target Interface
+class TargetInterface:
+    def method(self, param):
+        pass
+
+```# Define the Adaptee
+class Adaptee:
+    def incompatible_method(self, param):
+        # Implementation
+        pass
+
+```# Define the Adapter
+class Adapter(TargetInterface):
+    def __init__(self, adaptee):
+        self.adaptee = adaptee
+    
+    def method(self, param):
+        self.adaptee.incompatible_method(param)
+
+```# Using the Adapter
+adaptee = Adaptee()
+adapter = Adapter(adaptee)
+adapter.method("example_param")
+
