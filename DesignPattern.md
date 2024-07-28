@@ -83,7 +83,7 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 - **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
 - **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
 ``` Bash
-In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
+In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.
 
 ## ObserverPattern  
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
