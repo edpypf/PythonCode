@@ -101,7 +101,7 @@ Reusability: The same observer can be used with different subjects.
 Memory Leaks: If observers are not properly removed, they can cause memory leaks.
 Complexity: The pattern can add complexity to the system due to the need for managing multiple observers and their notifications.
 - **Event based observer**
-''' Bash
+``` Bash
 class Event(list):
     def __call__(self, *args, **kwargs):
         for item in self:
