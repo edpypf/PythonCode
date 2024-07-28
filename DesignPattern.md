@@ -50,7 +50,7 @@ The Template pattern fits for the situation of : **creating a fixed sequence of 
     @abstractmethod
     def winning_player(self): pass```
 - **Concrete Class**: (Chess):  It customizes the behavior of the algorithm by providing specific details for some of the steps in the subclass.
-  ```
+  ``` Bash
   class Chess(Game):
     def __init__(self):
         super().__init__()
@@ -82,7 +82,8 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 - **State Interface**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
 - **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
 - **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
-```In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
+``` Bash
+In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined.```
 
 ## ObserverPattern  
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
