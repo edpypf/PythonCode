@@ -297,5 +297,6 @@ The Bridge pattern fits for the situation of : **you can create a more flexible,
 - **Implementor interface**: (MessageSender): This is the low-level interface for sending notifications through various channels.
 - **Concrete Implementor**: (EmailSender, SMSSender) These implement the notification sending methods for specific channels
 - **Bridge the Abstraction and Implementor**: The abstraction (Notification) maintains a reference to the implementor (MessageSender), allowing different combinations of notification types and message channels.
-``` alert_notification_with_email = AlertNotification(email_sender); reminder_notification_with_sms = ReminderNotification(sms_sender)
+
+```alert_notification_with_email = AlertNotification(email_sender); reminder_notification_with_sms = ReminderNotification(sms_sender)
 
