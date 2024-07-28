@@ -12,7 +12,7 @@ Design Patter is used in OOP programming, this page listed all the patterns, log
 
 ## List of Patterns
 -  Creational Patterns：- [Singleton](#singleton) - [Factory](#factory) - [Abstract](#abstract) - [Builder](#builder) - [Prototype](#prototype) 
--  Structural Patterns：- [Adapter](#AdapterPattern) - [Bridge](#bridge) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
+-  Structural Patterns：- [Adapter](#AdapterPattern) - [Bridge](#BridgePattern) - [Composite](#composite) - [Flyweight](#flyweight) - [Decorator](#decorator) - [Proxy](#proxy) - [Facade](#facade)
 -  Behavioral Patterns：- [Visitor](#VisitorPattern) - [Template](#TemplatePattern) - [Strategy](#StrategyPattern) - [State](#StatePattern) - [observer](#ObserverPattern) - [Memento](#MementoPattern) - [Mediator](#MediatorPattern) - [Command](#command) - [Chain of Responsibility](#chainofresponsibility) - [Interpreter](#interpreter) - [Iterator](#IteratorPattern)
 ## -----------------------------------<->**Behavioral** <-> **Behavioral** -----------------------------------
 ## VisitorPattern  
@@ -289,10 +289,13 @@ adaptee = Adaptee()
 adapter = Adapter(adaptee)
 adapter.method("example_param") 
 ```
-## MementoPattern  
-The Memento pattern fits for the situation of : **scenarios where maintaining and restoring object states is crucial, such as in undo/redo functionality in applications.**
-[Memento-Bank Balance Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalance.py) | [Memento-Bank Balances redo/undo Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalanceUndoRedo.py) | [Memento-TextEditor ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoTextEditor_ChatGpt.py)
-- **Memento**: (Memento): The Memento Pattern ensures that the state of an object is saved and restored without violating its encapsulation. The internal state is only accessible through the Memento, and only the Originator can create and use Mementos.
-- **Originator**: (TextEditor): The object whose state needs to be saved and restored.
-- **Caretaker**: (Caretaker): Defines undo and redo.
-- **Drawback**: Memory Overhead: Storing multiple Mementos can consume a significant amount of memory, especially if the state objects are large or if there are many states to save. Complexity: Implementing the Memento Pattern can add complexity to the code, particularly in managing the Caretaker and ensuring that Mementos are properly created and used.
+## BridgePattern  
+The Bridge pattern fits for the situation of : **you can create a more flexible, scalable, and maintainable system architecture, especially in complex applications with multiple variations of abstractions and implementations.**
+[Bridge Notification Sender Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/BridgeNotificationSender.py)
+- **Abstraction**: (Notification): Defines the high-level interface and maintains a reference to an Implementor object.
+- **Refined Abstratction**: (AlertNotification, ReminderNotification): extend the abstraction for specific notification types
+- **Implementor interface**: (MessageSender): This is the low-level interface for sending notifications through various channels.
+- **Concrete Implementor**: (EmailSender, SMSSender) These implement the notification sending methods for specific channels
+- **Bridge the Abstraction and Implementor**: The abstraction (Notification) maintains a reference to the implementor (MessageSender), allowing different combinations of notification types and message channels.
+``` alert_notification_with_email = AlertNotification(email_sender); reminder_notification_with_sms = ReminderNotification(sms_sender)
+
