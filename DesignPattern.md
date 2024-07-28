@@ -271,13 +271,13 @@ class TargetInterface:
     def method(self, param):
         pass
 
-```# Define the Adaptee
+# Define the Adaptee
 class Adaptee:
     def incompatible_method(self, param):
         # Implementation
         pass
 
-```# Define the Adapter
+# Define the Adapter
 class Adapter(TargetInterface):
     def __init__(self, adaptee):
         self.adaptee = adaptee
@@ -285,7 +285,7 @@ class Adapter(TargetInterface):
     def method(self, param):
         self.adaptee.incompatible_method(param)
 
-```# Using the Adapter
+# Using the Adapter
 adaptee = Adaptee()
 adapter = Adapter(adaptee)
 adapter.method("example_param") 
