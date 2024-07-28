@@ -342,11 +342,11 @@ The Flyweight pattern fits for the situation of : **represent a hierarchy of obj
 - **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
 
 ## FlyweightPattern  
-The Flyweight pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
-[Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
-- **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
-- **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
-- **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
+The Flyweight pattern aims to reduce memory usage by sharing as much data as possible. Here’s how it’s applied in your code. Suitable for : **scenarios where there is a large number of objects that can share common data to save memory.**
+[Flyweight userName Searching Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_Reuse_Name_String.py) | [FlyWeight Doc Management System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyweightDocumentMgmtSystem.py) |[FlyWeight Text Formatting Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_CapChar.py)
+- **Flyweight Class**: (font, color): Represents shared state (e.g., font, color). Represents the shared state (font and color) of a word.
+- **Context Class**: (position): Represents unique state (e.g., position in the document). Ensures that flyweight instances are shared and reused to minimize memory usage.
+- **Flyweight Factory**: (Manager): Manages the creation and reuse of flyweight objects. Ensures that flyweight instances are shared and reused to minimize memory usage.
 
 ## FacadePattern  
 The Flyweight pattern fits for the situation of : **where you need to simplify complex systems, decouple clients from subsystems, create a unified interface, and improve code readability and maintenance.**
