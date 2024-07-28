@@ -333,3 +333,25 @@ The Decorator pattern fits for the situation of : **allows behavior to be added 
       def book_room(room_type, customer_id):
         print(f"Booking {room_type} for customer {customer_id}.")
 - **@wraps(func)**: The @wraps(func) decorator from the functools module is used to preserve the original function's metadata (such as its name, docstring, and module) when it is wrapped by another function. This is crucial for accurate logging, debugging, and maintaining the integrity of the function's signature and documentation.
+
+## ProxyPattern  
+The Flyweight pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
+[Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
+- **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
+- **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
+- **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
+
+## FlyweightPattern  
+The Flyweight pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
+[Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
+- **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
+- **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
+- **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
+
+## FacadePattern  
+The Flyweight pattern fits for the situation of : **where you need to simplify complex systems, decouple clients from subsystems, create a unified interface, and improve code readability and maintenance.**
+[Facade online Hotel Booking Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FacadeOnlineHotelBooking.py) | [Facade OnlineTravel Booking Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FacadeOnLineTravelBooking.py)
+- **Key Points**: **Simplification**: Provides a simpler interface to a complex system | **Isolation**: Decouples the client from the complex subsystem | **Unified Interface**: Combines multiple interfaces into a single unified interface
+- **Step by Step - Subsystem Classes**: (RoomBooking, Payment, Notification):  The simplified interface
+- **Step by Step - Facade**: (HotelBookingFacade): The complex system's classes that the Facade interacts with.
+- **Step by Step - Client Code**: (facade = HotelBookingFacade()): facade.book_room("single", "customer123")
