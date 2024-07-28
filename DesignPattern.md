@@ -28,7 +28,8 @@ define the skeleton of an algorithm in a base class but allows subclasses to pro
 The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
 [Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
 - **Template Method**: (Employee): **Abstract Class** typically consists of a sequence of method calls, including both concrete and abstract methods. <ABC, abstractmethod, > for **Primitive Operaations**
-  ```class Game(ABC):
+  ``` Bash
+  class Game(ABC):
     def run(self):
         self.start()
         while not self.have_winner:
@@ -99,17 +100,18 @@ Reusability: The same observer can be used with different subjects.
 Memory Leaks: If observers are not properly removed, they can cause memory leaks.
 Complexity: The pattern can add complexity to the system due to the need for managing multiple observers and their notifications.
 - **Event based observer**
-'''class Event(list):
+''' Bash
+class Event(list):
     def __call__(self, *args, **kwargs):
         for item in self:
             item(*args, **kwargs)
 
-```# Observer interface
+# Observer interface
 class Observer:
     def update(self, event_data):
         pass
 
-```# Concrete Observer
+# Concrete Observer
 class ConcreteObserver(Observer):
     def __init__(self, name):
         self._name = name
@@ -117,7 +119,7 @@ class ConcreteObserver(Observer):
     def update(self, event_data):
         print(f'{self._name} received event: {event_data}')
 
-```# Subject with custom event
+# Subject with custom event
 class Subject:
     def __init__(self):
         self._event = Event()
@@ -132,7 +134,7 @@ class Subject:
         print(f'Generating event: {event_data}')
         self._event(event_data)
 
-```# Usage
+# Usage
 subject = Subject()
 
 observer1 = ConcreteObserver("Observer1")
@@ -145,7 +147,8 @@ subject.generate_event("Event 1")
 subject.generate_event("Event 2")
 
 - **Classic Observer**
-```# Observer interface
+``` Bash
+# Observer interface
 class Observer:
     def update(self, event_data):
         pass
@@ -188,7 +191,7 @@ subject.attach(observer2)
 
 subject.generate_event("Event 1")
 subject.generate_event("Event 2")
-```
+ 
 ## MementoPattern  
 The Memento pattern fits for the situation of : **scenarios where maintaining and restoring object states is crucial, such as in undo/redo functionality in applications.**
 [Memento-Bank Balance Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalance.py) | [Memento-Bank Balances redo/undo Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalanceUndoRedo.py) | [Memento-TextEditor ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoTextEditor_ChatGpt.py)
@@ -222,7 +225,8 @@ The Chain of Responsibility pattern fits for the situation of : **allows multipl
 - **Request**: (Query) represents a request that contains the information needed to perform the action (e.g., creature_name, what_to_query, default_value).
 - **Chain**: (list of handlers): Handlers are added to the Game's queries event, forming a chain.  Each handler can either handle the query or pass it to the next handler in the chain. When perform_query is called, it triggers all handlers in the chain.
 - **Usage**:
-  ```if __name__ == '__main__':
+  ``` Bash
+ if __name__ == '__main__':
     game = Game()
     goblin = Creature(game, 'Strong Goblin', 2, 2)
     print(goblin)  # Initial state
@@ -249,7 +253,7 @@ Apply Discounts: For a total price of $60, apply the discounts to get the final 
 **Benefits**:
 Flexibility: Easily add or modify discount rules without changing the core logic.
 Extensibility: Supports the addition of new types of discounts by implementing new expression classes.
-```
+ 
 ## IteratorPattern  
 The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
 [Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py)
