@@ -362,3 +362,24 @@ The Flyweight pattern fits for the situation of : **where you need to simplify c
 - **Step by Step - Subsystem Classes**: (RoomBooking, Payment, Notification):  The simplified interface
 - **Step by Step - Facade**: (HotelBookingFacade): The complex system's classes that the Facade interacts with.
 - **Step by Step - Client Code**: (facade = HotelBookingFacade()): facade.book_room("single", "customer123")
+
+## -----------------------------------<->**Creational** <-> **Creational** -----------------------------------
+## BuilderPattern  
+The Builder pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
+[Builder Facet Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/BuilderFacet.py) | [Builder Inheritence Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/BuilderInheritence.py) | [Builder Pizza with Director Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Builder_Pizza.py)
+- **Element Interface**: (Pizza): Defines the structure of the Pizza object with various attributes (size, cheese, pepperoni, veggies).
+- **Element Builder**: (Pizza Builder): Contains methods to set the size and add ingredients to the pizza. The build method returns the final Pizza object.
+- **Director Class**: (Director): Uses the builder to construct specific types of pizzas by calling the appropriate methods on the builder.
+``` Bash
+This pattern allows for a flexible and readable way to create different types of pizzas without having to manually set each attribute every time. The Director controls the construction process, ensuring that the creation of complex objects follows a consistent and easy-to-understand sequence.
+```
+## FactoryPattern  
+The Factory pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
+[Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
+- **Creator Class**: (DocumentCreator): defines the create_document factory method and the print_document method that uses the factory method to create a Document and print it.
+- **Product Interface**: (Document): base class declares the print method that all concrete document classes must implement.
+- **Concrete Products**: (Report and Invoice classes): These classes implement the Document interface and provide specific implementations of the print method.
+- **Concrete Creators**: (ReportCreator and InvoiceCreator): These classes inherit from DocumentCreator and override the create_document method to return instances of Report and Invoice, respectively.
+``` Bash
+the Factory Method pattern is used to create different types of documents (Reports and Invoices) by centralizing and encapsulating the creation logic in the DocumentCreator class and its subclasses. This makes the system flexible and easy to extend with new document types without modifying existing code.
+ 
