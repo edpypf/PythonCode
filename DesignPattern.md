@@ -371,7 +371,9 @@ The Builder pattern suitable for: **Configuration Objects, DB Queries, Game Deve
 - **Element Builder**: (Pizza Builder): Contains methods to set the size and add ingredients to the pizza. The build method returns the final Pizza object.
 - **Director Class**: (Director): Uses the builder to construct specific types of pizzas by calling the appropriate methods on the builder.
 ``` Bash
-This pattern allows for a flexible and readable way to create different types of pizzas without having to manually set each attribute every time. The Director controls the construction process, ensuring that the creation of complex objects follows a consistent and easy-to-understand sequence.
+This pattern allows for a flexible and readable way to create different types of pizzas without
+having to manually set each attribute every time. The Director controls the construction process,
+ensuring that the creation of complex objects follows a consistent and easy-to-understand sequence.
 ```
 ## FactoryPattern  
 The Factory pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
@@ -381,5 +383,7 @@ The Factory pattern suitable for: **Configuration Objects, DB Queries, Game Deve
 - **Concrete Products**: (Report and Invoice classes): These classes implement the Document interface and provide specific implementations of the print method.
 - **Concrete Creators**: (ReportCreator and InvoiceCreator): These classes inherit from DocumentCreator and override the create_document method to return instances of Report and Invoice, respectively.
 ``` Bash
-the Factory Method pattern is used to create different types of documents (Reports and Invoices) by centralizing and encapsulating the creation logic in the DocumentCreator class and its subclasses. This makes the system flexible and easy to extend with new document types without modifying existing code.
- 
+the Factory Method pattern is used to create different types of documents (Reports and Invoices)
+by centralizing and encapsulating the creation logic in the DocumentCreator class and its subclasses.
+This makes the system flexible and easy to extend with new document types without modifying existing code.
+```
