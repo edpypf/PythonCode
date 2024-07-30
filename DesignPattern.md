@@ -388,17 +388,24 @@ by centralizing and encapsulating the creation logic in the DocumentCreator clas
 This makes the system flexible and easy to extend with new document types without modifying existing code.
 ```
 ## SingletonPattern  
-The Singleton pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
-[Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
-- **Creator Class**: (DocumentCreator): defines the create_document factory method and the print_document method that uses the factory method to create a Document and print it.
-- **Product Interface**: (Document): base class declares the print method that all concrete document classes must implement.
-- **Concrete Products**: (Report and Invoice classes): These classes implement the Document interface and provide specific implementations of the print method.
-- **Concrete Creators**: (ReportCreator and InvoiceCreator): These classes inherit from DocumentCreator and override the create_document method to return instances of Report and Invoice, respectively.
+The Singleton pattern suitable for: **useful when exactly one object is needed to coordinate actions across the system.**
+[Singleton DB allocator Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDBAllocator.py) | [Singleton Decorator Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDecorator.py) | [Singleton Metaclass Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMetaclass.py) | [SingletonMonoState Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMonoState.py) | [Singleton TestCases Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonTestCases.py)
 ``` Bash
-the Factory Method pattern is used to create different types of documents (Reports and Invoices)
-by centralizing and encapsulating the creation logic in the DocumentCreator class and its subclasses.
-This makes the system flexible and easy to extend with new document types without modifying existing code.
+Business Example: Configuration Manager
+Imagine a business application that requires access to configuration settings from a central repository.
+These settings need to be consistent and only loaded once to avoid repeated reads from a configuration
+file or database, which can be both time-consuming and error-prone.
+Implementation:
+Singleton Class: ConfigurationManager
+This class reads configuration settings from a file or database and stores them in a dictionary.
+It ensures that only one instance of the configuration settings exists throughout the application.
+Access Point: getInstance()
+The method getInstance() is used to access the single instance of ConfigurationManager.
 ```
+- **Singleton Metaclass**: The Singleton metaclass keeps track of instances using the _instances dictionary. When ConfigurationManager is instantiated, it checks if an instance already exists. If not, it creates and stores the instance. Future instantiations return the stored instance.
+- **ConfigurationManager**: On initialization, ConfigurationManager loads the configuration settings into a dictionary. The method get_config() allows access to the configuration settings.
+- **Usage**: When config1 and config2 are created, they point to the same instance of ConfigurationManager. Accessing configuration settings through either config1 or config2 yields the same results, ensuring consistency across the application.
+
 ## AbstractPattern  
 The Abstract pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
 [Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
