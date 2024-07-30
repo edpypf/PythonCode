@@ -357,7 +357,7 @@ The Flyweight pattern aims to reduce memory usage by sharing as much data as pos
 - **Flyweight Factory**: (Manager): Manages the creation and reuse of flyweight objects. Ensures that flyweight instances are shared and reused to minimize memory usage.
 
 ## FacadePattern  
-The Flyweight pattern fits for the situation of : **where you need to simplify complex systems, decouple clients from subsystems, create a unified interface, and improve code readability and maintenance.**
+The Facade pattern fits for the situation of : **where you need to simplify complex systems, decouple clients from subsystems, create a unified interface, and improve code readability and maintenance.**
 [Facade online Hotel Booking Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FacadeOnlineHotelBooking.py) | [Facade OnlineTravel Booking Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FacadeOnLineTravelBooking.py)
 - **Key Points**: **Simplification**: Provides a simpler interface to a complex system | **Isolation**: Decouples the client from the complex subsystem | **Unified Interface**: Combines multiple interfaces into a single unified interface
 - **Step by Step - Subsystem Classes**: (RoomBooking, Payment, Notification):  The simplified interface
@@ -409,7 +409,7 @@ The method getInstance() is used to access the single instance of ConfigurationM
 
 ## AbstractPattern  
 The Abstract pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
-[Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
+[Factory Concept) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
 - **Creator Class**: (DocumentCreator): defines the create_document factory method and the print_document method that uses the factory method to create a Document and print it.
 - **Product Interface**: (Document): base class declares the print method that all concrete document classes must implement.
 - **Concrete Products**: (Report and Invoice classes): These classes implement the Document interface and provide specific implementations of the print method.
@@ -420,14 +420,30 @@ by centralizing and encapsulating the creation logic in the DocumentCreator clas
 This makes the system flexible and easy to extend with new document types without modifying existing code.
 ```
 ## PrototypePattern  
-The Prototype pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
-[Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
-- **Creator Class**: (DocumentCreator): defines the create_document factory method and the print_document method that uses the factory method to create a Document and print it.
-- **Product Interface**: (Document): base class declares the print method that all concrete document classes must implement.
-- **Concrete Products**: (Report and Invoice classes): These classes implement the Document interface and provide specific implementations of the print method.
-- **Concrete Creators**: (ReportCreator and InvoiceCreator): These classes inherit from DocumentCreator and override the create_document method to return instances of Report and Invoice, respectively.
+The Prototype pattern suitable for: **is valuable for situations where creating objects from scratch is costly, and where cloning a prototype can streamline the process of object creation.**
+[Prototype Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Prototype_deepcopy.py) | [Prototype Employee Factory Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Prototype_DeepcopyFactory.py) | [Prototype - Doc Mgt Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/PrototypeDocMgt.py)
+- **Prototype Interface**: (Employee): Defines the method for cloning itself. This is often an abstract class or an interface.
+- **Concrete Prototype**: (EmployeeFactory.main_office_employee, EmployeeFactory.aux_office_employee): They have predefined state - address & empty names. used as the base for creating new employees. are prototypes that you clone them to create new instances. provides the implementation of the clone method. It holds the actual state and specifies how to create a new instance by copying itself.
+- **Client Code**: (john and vincent): new Employee instances are created by cloning the prototypes and customizing them. Each new employee has its own name and suite while sharing the base address structure from the prototype.
 ``` Bash
-the Factory Method pattern is used to create different types of documents (Reports and Invoices)
-by centralizing and encapsulating the creation logic in the DocumentCreator class and its subclasses.
-This makes the system flexible and easy to extend with new document types without modifying existing code.
+allows you to create new objects by copying an existing object, known as the prototype. useful when the cost of 
+creating a new instance of an object is more expensive than copying an existing one. It's often used when objects 
+are complex to initialize or when the objects need to be duplicated with slight variations.
+
+import copy
+class Prototype:
+    def __init__(self, state):
+        self.state = state
+
+    def clone(self):
+        return copy.deepcopy(self)
+-- Client code
+original = Prototype("Initial State")
+clone1 = original.clone()
+clone2 = original.clone()
+clone1.state = "Changed State for Clone 1"
+
+print(f"Original: {original.state}")
+print(f"Clone 1: {clone1.state}")
+print(f"Clone 2: {clone2.state}")
 ```
