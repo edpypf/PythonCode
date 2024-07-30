@@ -390,7 +390,7 @@ This makes the system flexible and easy to extend with new document types withou
 ```
 ## SingletonPattern  
 The Singleton pattern suitable for: **useful when exactly one object is needed to coordinate actions across the system.**
-[Singleton DB allocator Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDBAllocator.py) | [Singleton Decorator Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDecorator.py) | [Singleton Metaclass Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMetaclass.py) | [SingletonMonoState Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMonoState.py) | [Singleton TestCases Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonTestCases.py)
+[Singleton DB allocator Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDBAllocator.py) | [Singleton Decorator Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDecorator.py) | [Singleton Metaclass Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMetaclass.py) | [SingletonMonoState Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMonoState.py) | [Singleton TestCases Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonTestCases.py) | [Singleton Configuration Manager Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonConfigurationManager.py)
 ``` Bash
 Business Example: Configuration Manager
 Imagine a business application that requires access to configuration settings from a central repository.
