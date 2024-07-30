@@ -409,15 +409,15 @@ The method getInstance() is used to access the single instance of ConfigurationM
 
 ## AbstractPattern  
 The Abstract pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
-[Factory Concept) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
-- **Creator Class**: (DocumentCreator): defines the create_document factory method and the print_document method that uses the factory method to create a Document and print it.
-- **Product Interface**: (Document): base class declares the print method that all concrete document classes must implement.
-- **Concrete Products**: (Report and Invoice classes): These classes implement the Document interface and provide specific implementations of the print method.
-- **Concrete Creators**: (ReportCreator and InvoiceCreator): These classes inherit from DocumentCreator and override the create_document method to return instances of Report and Invoice, respectively.
+[Abstract Factory Concept) | [Abstract Factory Coffee Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/AbstractFactory.py) | [Abstract UI Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/AbstractUIComponent.py)
+- **AbstractFactory**: (Button and Checkbox): Declares creation methods for abstract products. define interfaces for buttons and checkboxes.
+- **ConcreteFactory**: (WindowsButton and MacButton,WindowsCheckbox and MacCheckbox): Implements the creation methods and returns concrete products.. implement Button & checkbox for Windows and Mac.
+- **AbstractProduct**: (ReportCreator and InvoiceCreator): Declares the interface for a product. GUIFactory declares methods for creating abstract products. 
+- **Concrete Products**: (Report and Invoice classes): Implements the abstract product interface. WindowsFactory and MacFactory implement the GUIFactory interface and return concrete products.
+- **Client**: The client code uses the abstract factory to create products. It works with abstract products and factories, so it doesn't depend on the specific classes of the products.
 ``` Bash
-the Factory Method pattern is used to create different types of documents (Reports and Invoices)
-by centralizing and encapsulating the creation logic in the DocumentCreator class and its subclasses.
-This makes the system flexible and easy to extend with new document types without modifying existing code.
+the Abstract Factory Pattern is used to create families of related objects without specifying their
+concrete classes, promoting consistency and flexibility in object creation.
 ```
 ## PrototypePattern  
 The Prototype pattern suitable for: **is valuable for situations where creating objects from scratch is costly, and where cloning a prototype can streamline the process of object creation.**
