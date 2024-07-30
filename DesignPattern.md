@@ -84,7 +84,9 @@ Fits situation of : **It is useful for objects that need to exhibit different be
 - **Concrete State**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
 - **Context**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
 ``` Bash
-In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference, which is necessary when the TCPConnection class is referenced before it is fully defined. 
+In Python, the notation context: 'TCPConnection' is a type hint that specifies the type of the context
+parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference,
+which is necessary when the TCPConnection class is referenced before it is fully defined. 
 ```
 ## ObserverPattern  
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
@@ -251,10 +253,12 @@ The Mediator pattern fits for the situation of : **Configurable systems where be
  ```Bash
 Define Rules: Create concrete discount expressions (e.g., PercentageDiscount, FlatDiscount, ConditionalDiscount).
 
-**Apply Rules**: Sequentially apply these discount expressions to the total price. Each discount modifies the price according to its specific rule.
-Evaluate Final Price: After applying all discount expressions, compute and return the final price.
+**Apply Rules**: Sequentially apply these discount expressions to the total price. Each discount
+modifies the price according to its specific rule. Evaluate Final Price: After applying all discount
+expressions, compute and return the final price.
 Example:
-**Construct Discounts**: Define discount rules such as a 10% discount, a $5 discount, and a conditional 20% discount if the total price exceeds $50.
+**Construct Discounts**: Define discount rules such as a 10% discount, a $5 discount, and a
+conditional 20% discount if the total price exceeds $50.
 Apply Discounts: For a total price of $60, apply the discounts to get the final price.
 **Benefits**:
 Flexibility: Easily add or modify discount rules without changing the core logic.
@@ -310,7 +314,8 @@ The Bridge pattern fits for the situation of : **you can create a more flexible,
 - **Bridge the Abstraction and Implementor**: The abstraction (Notification) maintains a reference to the implementor (MessageSender), allowing different combinations of notification types and message channels.
 
 ```Bash
-alert_notification_with_email = AlertNotification(email_sender); reminder_notification_with_sms = ReminderNotification(sms_sender)
+alert_notification_with_email = AlertNotification(email_sender);
+reminder_notification_with_sms = ReminderNotification(sms_sender)
 ```
 ## CompositePattern  
 The Composite pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
