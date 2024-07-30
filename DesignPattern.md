@@ -228,8 +228,7 @@ The Chain of Responsibility pattern fits for the situation of : **allows multipl
 - **Request**: (Query) represents a request that contains the information needed to perform the action (e.g., creature_name, what_to_query, default_value).
 - **Chain**: (list of handlers): Handlers are added to the Game's queries event, forming a chain.  Each handler can either handle the query or pass it to the next handler in the chain. When perform_query is called, it triggers all handlers in the chain.
 - **Usage**:
-  ``` Bash
- if __name__ == '__main__':
+  ``` Bash  if __name__ == '__main__':
     game = Game()
     goblin = Creature(game, 'Strong Goblin', 2, 2)
     print(goblin)  # Initial state
@@ -240,6 +239,7 @@ The Chain of Responsibility pattern fits for the situation of : **allows multipl
         with IncreaseDefenseModifier(game, goblin):
             print(goblin)  # Attack doubled and defense increased
     print(goblin)  # Back to initial state
+  
 ## interpreter
 The Mediator pattern fits for the situation of : **Configurable systems where behavior is defined by expressions or rules|Expression evaluation|Language parsing**.
 [Interpreter Discount Strategy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/InterpreterDiscountStrategy.py) 
