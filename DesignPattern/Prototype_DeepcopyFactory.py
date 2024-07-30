@@ -25,9 +25,9 @@ class EmployeeFactory:
     # define the deep copy method of the prototype
     @staticmethod
     def __new_employee(proto, name, suite):
-        result = copy.deepcopy(proto)
+        result = copy.deepcopy(proto)  # Deep copy the prototype
         result.name = name
-        ##********** here is where I got error, have to use the address.suite **************##
+        # Update the suite in the address
         result.address.suite = suite
         return result
         
@@ -39,9 +39,9 @@ class EmployeeFactory:
     def new_aux_office_employee(name, suite):
         return EmployeeFactory.__new_employee(EmployeeFactory.aux_office_employee, name, suite)
     
+# Create new employees using the factory
 john = EmployeeFactory.new_main_office_employee('John', 999)
 vincent = EmployeeFactory.new_main_office_employee('Vincent', 888888)
 
 print(john)
 print(vincent)
-    
