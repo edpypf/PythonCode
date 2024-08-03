@@ -232,7 +232,7 @@ Extensibility: Supports the addition of new types of discounts by implementing n
  ```
 ## IteratorPattern  
 The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
-[Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py)
+[Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py) | [Iterator ETL Pyspark Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorETLPyspark.py)
 - **Object Class**: (Order): Represents a customer order with attributes like order_id, customer_name, and total_amount.
 - **Iterator Class**: (OrderIterator): Implements the iterator pattern to allow sequential access to orders in the collection. It handles the iteration logic and maintains the current index.providing the __next__() method to fetch the next order.
 - **Obj Collection**: (OrderCollection ): Manages a collection of orders and provides an iterator to traverse through them. exposes an iterator through __iter__().
