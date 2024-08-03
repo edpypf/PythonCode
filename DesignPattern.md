@@ -358,7 +358,7 @@ The Facade pattern fits for the situation of : **where you need to simplify comp
 - **Step by Step - Client Code**: (facade = HotelBookingFacade()): facade.book_room("single", "customer123")
 
 ## -----------------------------------<->**Creational** <-> **Creational** -----------------------------------
-## BuilderPattern  
+## BuilderPattern - Return self 
 The Builder pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
 [Builder Facet Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/BuilderFacet.py) | [Builder Inheritence Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/BuilderInheritence.py) | [Builder Pizza with Director Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Builder_Pizza.py)
 - **Element Interface**: (Pizza): Defines the structure of the Pizza object with various attributes (size, cheese, pepperoni, veggies).
@@ -371,7 +371,7 @@ ensuring that the creation of complex objects follows a consistent and easy-to-u
 ```
 ## FactoryPattern  
 The Factory pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
-[Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py)
+[Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py) | [Factory ETL Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryETL.py)
 - **Creator Class**: (DocumentCreator): defines the create_document factory method and the print_document method that uses the factory method to create a Document and print it.
 - **Product Interface**: (Document): base class declares the print method that all concrete document classes must implement.
 - **Concrete Products**: (Report and Invoice classes): These classes implement the Document interface and provide specific implementations of the print method.
@@ -412,7 +412,7 @@ The Abstract pattern suitable for: **Configuration Objects, DB Queries, Game Dev
 the Abstract Factory Pattern is used to create families of related objects without specifying their
 concrete classes, promoting consistency and flexibility in object creation.
 ```
-## PrototypePattern  
+## PrototypePattern - DeepCopy 
 The Prototype pattern suitable for: **is valuable for situations where creating objects from scratch is costly, and where cloning a prototype can streamline the process of object creation.**
 [Prototype Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Prototype_deepcopy.py) | [Prototype Employee Factory Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Prototype_DeepcopyFactory.py) | [Prototype - Doc Mgt Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/PrototypeDocMgt.py)
 - **Prototype Interface**: (Employee): Defines the method for cloning itself. This is often an abstract class or an interface.
