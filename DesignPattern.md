@@ -39,7 +39,7 @@ The Strategy pattern fits for the situation of : **a list of option methods can 
 [Strategy Pattern - Payment Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/StrategyPayment.py)
 - **Strategy Interface**: (PaymentStrategy): base class with ABC, abstractmethod.
 - **Concrete Strategies**: (CreditCardPayment, PayPalPayment): Each concrete strategy provides a element and derived method(same name) on top of base class
-- **Context**: (ShopperingCart--> set_payment_strategy): Defines methods for visiting engineers and managers.
+- **Context**: (ShopperingCart--> set_payment_strategy): The class that uses a Strategy object. It maintains a reference to a Strategy instance and delegates the algorithm implementation to it.
 
 ## StatePattern  
 The State Pattern allows an object to change its behavior when its internal state changes. Instead of managing state transitions within a single class, the State Pattern delegates this responsibility to state-specific classes.
