@@ -211,7 +211,7 @@ The Chain of Responsibility pattern fits for the situation of : **allows multipl
   
 ## interpreter
 The interpreter pattern fits for the situation of : **Configurable systems where behavior is defined by expressions or rules|Expression evaluation|Language parsing**.
-[Interpreter Discount Strategy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/InterpreterDiscountStrategy.py) 
+[Interpreter Discount Strategy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/InterpreterDiscountStrategy.py) | [Interpreter ETL Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IntedpreterETL.py)
 - **Rules or Operations**: (Business rules, Grammar or Math Operators): (PercentageDiscount, FlatDiscount, Conditionaldiscount) | (Literal, Variable, Rule according to Grammar) | (+, -, *, Number) 
 - **Abstract Expressions**: (DiscountExpression): Abstract base class DiscountExpression for applying discounts.
 - **Concrete EXpressions**: (PercentageDiscount, FlatDiscount): Concrete classes for specific discount types 
