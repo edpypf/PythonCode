@@ -329,7 +329,7 @@ The Decorator pattern fits for the situation of : **allows behavior to be added 
 
 ## ProxyPattern  
 The Proxy Pattern provides a surrogate or placeholder for another object to control access to it. The proxy object acts as an intermediary, adding a level of indirection to support various operations. Suitable for : **access control, lazy initialization, logging, or remote access**
-[Proxy_OnlinePayment System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyOnlinePaymentSystem.py) | [Proxy DB Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyDBConnection.py))
+[Proxy_OnlinePayment System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyOnlinePaymentSystem.py) | [Proxy DB Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyDBConnection.py) | [Proxy DB Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyETL.py)
 - **Key Point**: 
 ``` Bash
 Control Access: The proxy can control access to the real object, adding security or validation checks.
