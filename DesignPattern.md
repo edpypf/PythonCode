@@ -237,6 +237,27 @@ The Iterator pattern fits for the situation of : **scenarios where you need to p
 - **Iterator Class**: (OrderIterator): Implements the iterator pattern to allow sequential access to orders in the collection. It handles the iteration logic and maintains the current index.providing the __next__() method to fetch the next order.
 - **Obj Collection**: (OrderCollection ): Manages a collection of orders and provides an iterator to traverse through them. exposes an iterator through __iter__().
 When iterating over order_collection, the for loop uses the iterator to access each Order object. This separation allows the OrderCollection class to focus on managing the orders, while the OrderIterator class handles the iteration logic.
+```
+How the Iteration is Triggered
+Initialization of Iterator:
+
+iterator = DataFrameIterator(df, batch_size) creates an instance of the DataFrameIterator class with the DataFrame and batch size.
+Iteration with For Loop:
+
+for batch_df in iterator: triggers the iteration. In Python, a for loop automatically calls the __iter__() method of the iterator object (which is the DataFrameIterator class here). The __iter__() method returns the iterator object itself.
+The for loop then repeatedly calls the __next__() method of the iterator to get the next batch of data until __next__() raises a StopIteration exception, signaling the end of the iteration.
+Detailed Flow
+Calling __iter__():
+
+When the for loop starts, it calls the __iter__() method on the iterator object. In the DataFrameIterator, this method simply returns self, indicating that DataFrameIterator is its own iterator.
+Calling __next__():
+
+The for loop then calls __next__() to get the next item. The __next__() method in DataFrameIterator calculates the next batch of data, updates the current_index, and returns the batch DataFrame.
+This process repeats, with __next__() being called in each iteration of the for loop, until all batches have been processed.
+Handling StopIteration:
+
+When there are no more batches left to process, __next__() raises a StopIteration exception. This is a signal to the for loop that the iteration is complete, and the loop terminates.
+```
 
 ## -------------------------------<-> **Structural** <-> **Structural** <-> -------------------------------
 ## AdapterPattern    
