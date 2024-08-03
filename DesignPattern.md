@@ -240,23 +240,23 @@ When iterating over order_collection, the for loop uses the iterator to access e
 ```
 How the Iteration is Triggered
 Initialization of Iterator:
-
-iterator = DataFrameIterator(df, batch_size) creates an instance of the DataFrameIterator class with the DataFrame and batch size.
+iterator = DataFrameIterator(df, batch_size) creates an instance of the DataFrameIterator class with the DataFrame & batch size.
 Iteration with For Loop:
-
-for batch_df in iterator: triggers the iteration. In Python, a for loop automatically calls the __iter__() method of the iterator object (which is the DataFrameIterator class here). The __iter__() method returns the iterator object itself.
-The for loop then repeatedly calls the __next__() method of the iterator to get the next batch of data until __next__() raises a StopIteration exception, signaling the end of the iteration.
+for batch_df in iterator: triggers the iteration. In Python, a for loop automatically calls the __iter__() method
+of the iterator object (which is the DataFrameIterator class here). The __iter__() method returns the iterator object itself.
+The for loop then repeatedly calls the __next__() method of the iterator to get the next batch of data until __next__()
+raises a StopIteration exception, signaling the end of the iteration.
 Detailed Flow
 Calling __iter__():
-
-When the for loop starts, it calls the __iter__() method on the iterator object. In the DataFrameIterator, this method simply returns self, indicating that DataFrameIterator is its own iterator.
+When the for loop starts, it calls the __iter__() method on the iterator object. In the DataFrameIterator, this method
+simply returns self, indicating that DataFrameIterator is its own iterator.
 Calling __next__():
-
-The for loop then calls __next__() to get the next item. The __next__() method in DataFrameIterator calculates the next batch of data, updates the current_index, and returns the batch DataFrame.
+The for loop then calls __next__() to get the next item. The __next__() method in DataFrameIterator calculates the
+next batch of data, updates the current_index, and returns the batch DataFrame.
 This process repeats, with __next__() being called in each iteration of the for loop, until all batches have been processed.
 Handling StopIteration:
-
-When there are no more batches left to process, __next__() raises a StopIteration exception. This is a signal to the for loop that the iteration is complete, and the loop terminates.
+When there are no more batches left to process, __next__() raises a StopIteration exception. This is a signal
+to the for loop that the iteration is complete, and the loop terminates.
 ```
 
 ## -------------------------------<-> **Structural** <-> **Structural** <-> -------------------------------
