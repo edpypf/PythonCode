@@ -56,12 +56,12 @@ which is necessary when the TCPConnection class is referenced before it is fully
 ```
 ## ObserverPattern  
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
-Fits situation of : **used in scenarios where changes in one object need to be propagated to one or more dependent objects, such as in GUI frameworks, event handling systems, and real-time data updates.**
+Fits situation of : **distributed event-handling systems, where the subject maintains a list of observers that need to be notified of changes.**
 [Property Observer - Age for Vote Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_dependencies_age.py), [Property Observer - Age for drive Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_observers.py), [Property Price Observer - Stock ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/PropertyObserver_Price_ChatGpt.py) 
-- **Subject Interface**: (tcp state): base class with ABC, abstractmethod.
-- **Concrete Subject**: (tcp ABC, abstratctmethod--> open, close, send): base class with ABC, abstractmethod. only method of open, close and send
-- **Observer Interface**: (ClosedState, ListeningState, EstablishedState): Implement the behavior associated with a particular state. using the Enum to manage transitions.
-- **Concrete Observer**: (TCPConnection--> set_state): Manages the current state using a dictionary of states.
+- **Subject Interface**: (Stock): maintains a list of observers and notifies them of any state changes. It usually provides methods to attach and detach observers. Manages a list of investors and provides methods to attach, detach, and notify them. set_price() updates the stock price and triggers notifications to all registered investors.
+- **Observer Interface**: (Investor): An interface or abstract class that defines the method update() which is called when the subject's state changes. Defines the update() method that observers use to receive notifications of price changes.
+- **Concrete Subject**: (ConcreteStock): A concrete implementation of the subject that maintains the state and sends notifications to observers. Implements the Stock interface and provides the specific stock functionality.
+- **Concrete Observer**: (IndividualInvestor and InstitutionalInvestor): A concrete implementation of the observer that reacts to state changes in the subject. Implement the update() method to handle notifications. Each observer can customize how it reacts to price changes. Implements the Stock interface and provides the specific stock functionality.
 - **Advantages**
 Decoupling: The observer pattern promotes loose coupling between the subject and the observers.
 Flexibility: Observers can be added or removed at runtime.
