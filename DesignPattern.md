@@ -189,7 +189,7 @@ The Command pattern fits for the situation of : **encapsulates requests as objec
 
 ## chainofresponsibility
 The Chain of Responsibility pattern fits for the situation of : **allows multiple objects to handle a request in a sequential chain, decoupling the sender from the receiver and enabling each handler to process the request or pass it to the next handler.**
-[Chain Basic Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainMethod.py) | [ChainOR Broker Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Chain_Broker.py) | [ChainOR_Support ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainOfResponsibility_ChatGpt.py)
+[Chain Basic Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainMethod.py) | [ChainOR Broker Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Chain_Broker.py) | [ChainOR_Support ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainOfResponsibility_ChatGpt.py) | [ChainOR ETL Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainOfResponsibilityETL.py)
 - **EventCaller**: __call__ for item in self: item(*args, **kwargs)
 - **Handler Interface**: (CreatureModifier): Base class for all handlers, This class registers itself with the Game's queries event, defines a abstract method 'handle', __exit__ to remove the queries 
 - **ConcreteHandler**: (DoubleAttackModifier; IncreaseDefenseModifier): modify the query based on specific conditions.
