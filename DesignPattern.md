@@ -24,48 +24,14 @@ The visitor pattern fits for the situation of : **Hierarchy of elements X multi 
 - **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
 
 ## TemplatePattern 
-define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. 
+define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. typically marked as **final to prevent subclasses from altering the sequence of the steps**.
 The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
-[Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py)
-- **Template Method**: (Employee): **Abstract Class** typically consists of a sequence of method calls, including both concrete and abstract methods. <ABC, abstractmethod, > for **Primitive Operaations**
-  ``` Bash
-  class Game(ABC):
-    def run(self):
-        self.start()
-        while not self.have_winner:
-            self.take_turn()
-        print(f'Player {self.winning_player} wins!')
-
-    @abstractmethod
-    def start(self): pass
-
-    @property
-    @abstractmethod
-    def have_winner(self): pass
-
-    @abstractmethod
-    def take_turn(self): pass
-
-    @property
-    @abstractmethod
-    def winning_player(self): pass
-  ```
-- **Concrete Class**: (Chess):  It customizes the behavior of the algorithm by providing specific details for some of the steps in the subclass.
-  ``` Bash
-  class Chess(Game):
-    def __init__(self):
-        super().__init__()
-        self.max_turns = 10
-        self.turn = 1
-
-    def start(self):
-        print('Starting a game of chess.')
-
-    @property
-    def have_winner(self):
-        return self.turn > self.max_turns
-
-    def take_turn(self):
+[Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py) [Template Coffee Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateCoffee.py)
+- **Abstract Class**: (CaffeineBeverage ) typically consists of a sequence of method calls, including both ABC, abstractmethod, for **Primitive Operations** 
+- **Concrete Class**: (Tea and Coffee) concrete subclasses that provide specific implementations for brewing and adding condiments.
+- **Abstract Methods**:(brew and addCondiments ) The abstract class also contains abstract methods that subclasses need to implement. These methods represent steps in the algorithm that can be customized.
+- **Concrete Methods**:(boilWater and pourInCup) The abstract class contains some concrete methods with implementations that are common to all subclasses.  
+- **Hook Methods**: (customerWantsCondiments):  Optionally, the abstract class may provide hook methods, which are methods with default implementations that can be overridden by subclasses if needed. hook methods in the Template Method Pattern offer a way to provide optional, extendable behavior in the algorithm defined by the template method. They give subclasses the opportunity to customize specific steps of the algorithm without altering the overall structure of the template method.
   
 ## StrategyPattern  
 The Strategy Pattern is used to define a family of algorithms, encapsulate each one, and make them interchangeable. It allows the client to select an algorithm at runtime.
