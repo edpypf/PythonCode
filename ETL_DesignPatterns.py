@@ -611,10 +611,168 @@ composite.add(Leaf())
 dataframes = composite.operation()
 This example provides a high-level overview of how to use various design patterns in the context of a PySpark ETL process. Each pattern is implemented in a simplified form to illustrate its usage.
 
+##*******************************************************************************************##
+END to END Solutions
+
+Creating a complete ETL (Extract, Transform, Load) pipeline in PySpark using various design patterns involves integrating multiple components to handle different aspects of data processing efficiently. Here's an end-to-end ETL design that incorporates several design patterns to demonstrate their use in a practical context.
+
+Step-by-Step ETL Design
+Singleton Pattern for SparkSession.
+Factory Method Pattern for data readers.
+Strategy Pattern for different transformation strategies.
+Template Method Pattern for defining the ETL process.
+Observer Pattern for logging and monitoring.
+Implementation
+1. Singleton Pattern for SparkSession
+Ensure only one SparkSession is created and used throughout the application.
 
 
+from pyspark.sql import SparkSession
+
+class SingletonSparkSession:
+    _instance = None
+
+    @staticmethod
+    def get_instance():
+        if SingletonSparkSession._instance is None:
+            SingletonSparkSession._instance = SparkSession.builder.appName("ETLExample").getOrCreate()
+        return SingletonSparkSession._instance
+
+spark = SingletonSparkSession.get_instance()
+2. Factory Method Pattern for Data Readers
+Create a common interface for reading data from different sources.
 
 
+class DataReader:
+    def read(self, spark, path):
+        pass
+
+class CSVReader(DataReader):
+    def read(self, spark, path):
+        return spark.read.csv(path, header=True, inferSchema=True)
+
+class ParquetReader(DataReader):
+    def read(self, spark, path):
+        return spark.read.parquet(path)
+
+class DataReaderFactory:
+    @staticmethod
+    def create_reader(file_type):
+        if file_type == "csv":
+            return CSVReader()
+        elif file_type == "parquet":
+            return ParquetReader()
+        else:
+            raise ValueError("Unsupported file type")
+3. Strategy Pattern for Transformations
+Define different transformation strategies.
+
+
+class TransformationStrategy:
+    def apply(self, df):
+        pass
+
+class FilterAdultsStrategy(TransformationStrategy):
+    def apply(self, df):
+        return df.filter(df.age > 18)
+
+class SelectColumnsStrategy(TransformationStrategy):
+    def apply(self, df):
+        return df.select("name", "age")
+4. Template Method Pattern for ETL Process
+Define the skeleton of the ETL process, allowing subclasses to implement specific steps.
+
+
+class ETLProcess:
+    def __init__(self, reader, transformations, output_path):
+        self.reader = reader
+        self.transformations = transformations
+        self.output_path = output_path
+
+    def execute(self, spark, input_path):
+        df = self.extract(spark, input_path)
+        df = self.transform(df)
+        self.load(df)
+
+    def extract(self, spark, input_path):
+        return self.reader.read(spark, input_path)
+
+    def transform(self, df):
+        for transformation in self.transformations:
+            df = transformation.apply(df)
+        return df
+
+    def load(self, df):
+        df.write.parquet(self.output_path)
+5. Observer Pattern for Logging and Monitoring
+Allow for logging and monitoring of the ETL process.
+
+
+class Observer:
+    def update(self, event, data=None):
+        pass
+
+class Logger(Observer):
+    def update(self, event, data=None):
+        print(f"Event: {event}, Data: {data}")
+
+class ETLObservable:
+    def __init__(self):
+        self.observers = []
+
+    def attach(self, observer):
+        self.observers.append(observer)
+
+    def notify(self, event, data=None):
+        for observer in self.observers:
+            observer.update(event, data)
+
+class ObservableETLProcess(ETLProcess, ETLObservable):
+    def __init__(self, reader, transformations, output_path):
+        ETLProcess.__init__(self, reader, transformations, output_path)
+        ETLObservable.__init__(self)
+
+    def execute(self, spark, input_path):
+        self.notify("start", input_path)
+        super().execute(spark, input_path)
+        self.notify("end", self.output_path)
+Putting It All Together
+
+def main():
+    spark = SingletonSparkSession.get_instance()
+
+    # Factory to create a data reader
+    reader = DataReaderFactory.create_reader("csv")
+
+    # Transformation strategies
+    transformations = [
+        FilterAdultsStrategy(),
+        SelectColumnsStrategy()
+    ]
+
+    # Define the output path
+    output_path = "path/to/output"
+
+    # Create an observable ETL process
+    etl_process = ObservableETLProcess(reader, transformations, output_path)
+
+    # Attach a logger
+    logger = Logger()
+    etl_process.attach(logger)
+
+    # Execute the ETL process
+    input_path = "path/to/input.csv"
+    etl_process.execute(spark, input_path)
+
+if __name__ == "__main__":
+    main()
+Explanation
+SingletonSparkSession: Ensures only one instance of SparkSession is created.
+DataReaderFactory: Uses the factory method pattern to create appropriate data readers based on the file type.
+TransformationStrategy: Different strategies for transforming the DataFrame.
+ETLProcess: Defines the ETL process skeleton using the template method pattern.
+ObservableETLProcess: Extends ETLProcess and ETLObservable to add observer capabilities for logging and monitoring.
+This design ensures a flexible and maintainable ETL pipeline by decoupling different parts of the process and using design patterns to manage the complexity.
 
 
 
