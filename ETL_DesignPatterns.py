@@ -196,7 +196,7 @@ class SingletonWithMetaDBConnection(metaclass=SingletonMeta):
 db_conn = SingletonWithMetaDBConnection()
 print(db_conn.spark)
 
-<< 6. Decorator >> 
+# << 6. Decorator way of singleton >> 
 from pyspark.sql import SparkSession
 
 def singleton(cls):
@@ -272,11 +272,11 @@ adapter = NewPaymentGatewayAdapter(new_gateway)
 # Using the adapter to process the payment
 make_payment(adapter, 100.0)
 
-
+'''
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 4. Decorator Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-Add responsibilities to objects dynamically.
-
-
+Add responsibilities or features to objects dynamically. 
+<< 4.1 Function Decorator >>
+'''
 def log_execution(func):
     def wrapper(*args, **kwargs):
         print(f"Executing {func.__name__}")
@@ -290,6 +290,43 @@ def read_data(spark, path):
     return spark.read.csv(path, header=True, inferSchema=True)
 
 df = read_data(spark, "path/to/csv")
+
+<< 4.2 Method Decorator >>
+def my_method_decorator(method):
+    def wrapper(self, *args, **kwargs):
+        print("Something is happening before the method is called.")
+        result = method(self, *args, **kwargs)
+        print("Something is happening after the method is called.")
+        return result
+    return wrapper
+
+class MyClass:
+    @my_method_decorator
+    def say_hello(self):
+        print("Hello from a method!")
+
+obj = MyClass()
+obj.say_hello()
+
+<< 4.3 Class Decorator >>
+def my_method_decorator(method):
+    def wrapper(self, *args, **kwargs):
+        print("Something is happening before the method is called.")
+        result = method(self, *args, **kwargs)
+        print("Something is happening after the method is called.")
+        return result
+    return wrapper
+
+class MyClass:
+    @my_method_decorator
+    def say_hello(self):
+        print("Hello from a method!")
+
+obj = MyClass()
+obj.say_hello()
+
+
+
 5. Command Pattern
 Encapsulate a request as an object, thereby allowing for parameterization and queuing of requests.
 
