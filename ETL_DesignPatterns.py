@@ -434,15 +434,10 @@ are modifying (functions, methods, classes, properties, etc.). They provide a po
 way to extend and modify behavior in a clean and reusable manner.
 '''
 
-
-
-
-
-
-5. Command Pattern
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 5. Command Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Encapsulate a request as an object, thereby allowing for parameterization and queuing of requests.
-
-
+******************************** Summary *************************************************
+'''
 class Command:
     def execute(self):
         pass
@@ -457,8 +452,11 @@ class ReadCSVCommand(Command):
 
 read_command = ReadCSVCommand(spark, "path/to/csv")
 df = read_command.execute()
-6. Strategy Pattern
+'''
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 6. Strategy Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Define a family of algorithms, encapsulate each one, and make them interchangeable.
+******************************************* Summary *************************************************
+
 
 
 class ReadStrategy:
@@ -482,10 +480,13 @@ class DataReader:
 
 csv_reader = DataReader(CSVReadStrategy())
 df = csv_reader.read(spark, "path/to/csv")
-7. Observer Pattern
-Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
 
-
+'''
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 7. Observer Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Define a one-to-many dependency between objects so that when one object changes state, 
+all its dependents are notified and updated automatically.
+******************************** Summary *************************************************
+'''
 class DataObserver:
     def update(self, df):
         pass
