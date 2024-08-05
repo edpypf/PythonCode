@@ -308,22 +308,130 @@ class MyClass:
 obj = MyClass()
 obj.say_hello()
 
-<< 4.3 Class Decorator >>
-def my_method_decorator(method):
-    def wrapper(self, *args, **kwargs):
-        print("Something is happening before the method is called.")
-        result = method(self, *args, **kwargs)
-        print("Something is happening after the method is called.")
-        return result
-    return wrapper
+<< 4.3 Class Decorator >> 
+These decorators are applied to classes to modify or extend their behavior.
 
+def my_class_decorator(cls):
+    cls.extra_attribute = "I am an extra attribute"
+    return cls
+
+@my_class_decorator
 class MyClass:
-    @my_method_decorator
-    def say_hello(self):
-        print("Hello from a method!")
+    pass
 
 obj = MyClass()
-obj.say_hello()
+print(obj.extra_attribute)
+'''
+<<< 4. Property Decorators >>>
+These decorators are used to create getter, setter, and deleter methods for class attributes.
+'''
+class MyClass:
+    def __init__(self, value):
+        self._value = value
+
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        self._value = value
+
+    @value.deleter
+    def value(self):
+        del self._value
+
+obj = MyClass(10)
+print(obj.value)
+obj.value = 20
+print(obj.value)
+del obj.value
+'''
+<<< 5. Static and Class Method Decorators >>>
+These decorators are used to define static methods and class methods.
+'''
+class MyClass:
+    @staticmethod
+    def static_method():
+        print("This is a static method.")
+
+    @classmethod
+    def class_method(cls):
+        print("This is a class method.")
+
+MyClass.static_method()
+MyClass.class_method()
+'''
+<< 6. Decorators with Arguments >>
+These decorators take arguments themselves, adding a layer of complexity but also flexibility.
+''' 
+def decorator_with_args(arg):
+    def my_decorator(func):
+        def wrapper(*args, **kwargs):
+            print(f"Decorator argument: {arg}")
+            return func(*args, **kwargs)
+        return wrapper
+    return my_decorator
+
+@decorator_with_args("Hello")
+def say_hello():
+    print("Hello!")
+
+say_hello()
+'''
+<< 7. Chained Decorators >>
+These involve applying multiple decorators to a single function or method.
+'''
+def decorator1(func):
+    def wrapper(*args, **kwargs):
+        print("Decorator 1")
+        return func(*args, **kwargs)
+    return wrapper
+
+def decorator2(func):
+    def wrapper(*args, **kwargs):
+        print("Decorator 2")
+        return func(*args, **kwargs)
+    return wrapper
+
+@decorator1
+@decorator2
+def say_hello():
+    print("Hello!")
+
+say_hello()
+'''
+<< 8. Context Manager Decorators >>
+These are used to manage resources before and after function execution, similar to context managers but as decorators.
+'''
+from contextlib import contextmanager
+
+@contextmanager
+def my_context_manager():
+    print("Before")
+    yield
+    print("After")
+
+def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        with my_context_manager():
+            return func(*args, **kwargs)
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+'''
+Summary
+Decorators in Python can be categorized based on their usage and the type of entity they 
+are modifying (functions, methods, classes, properties, etc.). They provide a powerful 
+way to extend and modify behavior in a clean and reusable manner.
+'''
+
+
+
 
 
 
