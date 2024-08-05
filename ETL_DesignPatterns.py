@@ -433,7 +433,12 @@ Decorators in Python can be categorized based on their usage and the type of ent
 are modifying (functions, methods, classes, properties, etc.). They provide a powerful 
 way to extend and modify behavior in a clean and reusable manner.
 '''
-
+###################### PySpark ETL examples to show when to use the ##############################3
+## Command Pattern, 
+## Strategy Pattern, 
+## Template Method Pattern, 
+## Chain of Responsibility Pattern, 
+## Observer Pattern. 
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 5. Command Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Encapsulate a request as an object, thereby allowing for parameterization and queuing of requests.
 ******************************** Summary *************************************************
