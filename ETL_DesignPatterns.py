@@ -403,6 +403,10 @@ say_hello()
 '''
 << 8. Context Manager Decorators >>
 These are used to manage resources before and after function execution, similar to context managers but as decorators.
+In Python, the yield statement is used in a context manager to create a boundary where setup and teardown code can be 
+separated. The @contextmanager decorator from the contextlib module uses yield to manage this boundary effectively.
+You can create context managers by defining a class with __enter__ and __exit__ methods. This approach doesn’t use 
+yield but provides similar functionality.
 '''
 from contextlib import contextmanager
 
