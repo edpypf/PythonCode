@@ -1,56 +1,279 @@
-User
-please provide an pyspark ETL example using all 26 patterns in python
-ChatGPT
-Creating a comprehensive ETL (Extract, Transform, Load) process using PySpark involves leveraging various patterns to handle different aspects of data processing. Here, we'll outline a simplified example that touches on the 26 design patterns often used in software engineering. Given the complexity, the full implementation of each pattern in a real-world scenario would be extensive. Instead, this example provides a high-level overview and code snippets for each pattern.
+### An pyspark ETL example using all 26 patterns in python ###
+'''
+Creating a comprehensive ETL (Extract, Transform, Load) process using PySpark involves 
+leveraging various patterns to handle different aspects of data processing. Here, we'll 
+outline a simplified example that touches on the 26 design patterns often used in software 
+engineering. Given the complexity, the full implementation of each pattern in a real-world 
+scenario would be extensive. Instead, this example provides a high-level overview and code 
+snippets for each pattern.
 
-1. Factory Method Pattern
-The factory method pattern is used to create objects without specifying the exact class of object that will be created.
+<<<<<<<<<<<<<<<<<<<< 1. Factory Method Pattern >>>>>>>>>>>>>>>>>>>>>>>>
+encapsulates the logic of instantiating the appropriate class based on certain parameters 
+or conditions. It is called a "factory method" because it acts like a factory, producing 
+objects based on the given criteria.
+***************** Summary **********************
+base class - multi actual different format of sources class & read method -
+factory class & method to call sources based on condition - provide parameter and run
+''' 
+from abc import ABC, abstractmethod
+#------------------------> abstract base class and abstractmethod --------------------->
+from abc import ABC, abstractmethod
+from pyspark.sql import DataFrame
 
+class DataExtractor(ABC):
+    @abstractmethod
+    def extract_data(self, spark) -> DataFrame:
+        pass
+#------------------------> actual concrete class and method --------------------->
+class CSVDataExtractor(DataExtractor):
+    def __init__(self, file_path):
+        self.file_path = file_path
 
+    def extract_data(self, spark):
+        return spark.read.csv(self.file_path, header=True, inferSchema=True)
+
+class JSONDataExtractor(DataExtractor):
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+    def extract_data(self, spark):
+        return spark.read.json(self.file_path, inferSchema=True)
+
+class ParquetDataExtractor(DataExtractor):
+    def __init__(self, file_path):
+        self.file_path = file_path
+
+    def extract_data(self, spark):
+        return spark.read.parquet(self.file_path)
+#------------------------> Factory method, instantiate the object based on conditions --------------------->
+class DataExtractorFactory:
+    @staticmethod
+    def get_data_extractor(source_type, file_path):
+        if source_type == 'csv':
+            return CSVDataExtractor(file_path)
+        elif source_type == 'json':
+            return JSONDataExtractor(file_path)
+        elif source_type == 'parquet':
+            return ParquetDataExtractor(file_path)
+        else:
+            raise ValueError(f"Unknown data source type: {source_type}")
+#------------------------> main to use it --------------------->
+from pyspark.sql import SparkSession
+def main():
+    spark = SparkSession.builder \
+        .appName("ETL Example") \
+        .getOrCreate()
+
+    source_type = 'csv'  # This could come from a configuration file or user input
+    file_path = 'data/sample.csv'
+
+    data_extractor = DataExtractorFactory.get_data_extractor(source_type, file_path)
+    data = data_extractor.extract_data(spark)
+    data.show()
+
+if __name__ == "__main__":
+    main()
+
+'''
+<<<<<<<<<<<<<<<<<<<<< 2. Singleton Pattern >>>>>>>>>>>>>>>>>>>>>>>>
+Ensure a class has only one instance and provide a global point of access to it.
+depends on the specific requirements and constraints of your application, choose the right type:
+Eager Initialization: Best when resource use is not a concern and simplicity is desired.
+Lazy Initialization: Useful when resources are expensive, and you want to ensure they are only used when necessary.
+Thread-Safe Singleton: Necessary in multi-threaded environments but comes with a performance cost.
+Bill Pugh Singleton: Provides a balance of thread safety and lazy initialization without synchronization overhead.
+Metaclasses: Best for Python-specific use cases where elegance and control over class creation are important.
+Decorator: Simple and flexible but requires careful handling in multi-threaded environments.
+<< 1. Eager Initialization >>
+'''
 from pyspark.sql import SparkSession
 
-class SparkSessionFactory:
-    @staticmethod
-    def create():
-        return SparkSession.builder.appName("ETLExample").getOrCreate()
-
-spark = SparkSessionFactory.create()
-2. Singleton Pattern
-Ensure a class has only one instance and provide a global point of access to it.
-
-
-class SingletonSpark:
+class SingletonEagerDBConnection:
     _instance = None
-    
+
     @staticmethod
-    def getInstance():
-        if SingletonSpark._instance is None:
-            SingletonSpark._instance = SparkSession.builder.appName("ETLExample").getOrCreate()
-        return SingletonSpark._instance
+    def get_instance():
+        if SingletonEagerDBConnection._instance is None:
+            SingletonEagerDBConnection._instance = SingletonEagerDBConnection()
+        return SingletonEagerDBConnection._instance
 
-spark = SingletonSpark.getInstance()
-3. Adapter Pattern
-Allow incompatible interfaces to work together.
+    def __init__(self):
+        if SingletonEagerDBConnection._instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            self.spark = SparkSession.builder.appName("Eager Initialization Singleton").getOrCreate()
+
+# Usage
+db_conn = SingletonEagerDBConnection.get_instance()
+print(db_conn.spark)
+
+<< 2. Lazy Initialization >> 
+from pyspark.sql import SparkSession
+
+class SingletonLazyDBConnection:
+    _instance = None
+
+    @staticmethod
+    def get_instance():
+        if SingletonLazyDBConnection._instance is None:
+            SingletonLazyDBConnection._instance = SingletonLazyDBConnection()
+        return SingletonLazyDBConnection._instance
+
+    def __init__(self):
+        if SingletonLazyDBConnection._instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            self.spark = SparkSession.builder.appName("Lazy Initialization Singleton").getOrCreate()
+
+# Usage
+db_conn = SingletonLazyDBConnection.get_instance()
+print(db_conn.spark)
+
+<< 3. Thread-Safe Singleton >>
+import threading
+from pyspark.sql import SparkSession
+
+class SingletonThreadSafeDBConnection:
+    _instance = None
+    _lock = threading.Lock()
+
+    @staticmethod
+    def get_instance():
+        if SingletonThreadSafeDBConnection._instance is None:
+            with SingletonThreadSafeDBConnection._lock:
+                if SingletonThreadSafeDBConnection._instance is None:
+                    SingletonThreadSafeDBConnection._instance = SingletonThreadSafeDBConnection()
+        return SingletonThreadSafeDBConnection._instance
+
+    def __init__(self):
+        if SingletonThreadSafeDBConnection._instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            self.spark = SparkSession.builder.appName("Thread-Safe Singleton").getOrCreate()
+
+# Usage
+db_conn = SingletonThreadSafeDBConnection.get_instance()
+print(db_conn.spark)
+
+<< 4. Bill Pugh Singleton >>
+from pyspark.sql import SparkSession
+
+class SingletonBillPughDBConnection:
+    class _SingletonHelper:
+        _instance = SingletonBillPughDBConnection()
+
+    @staticmethod
+    def get_instance():
+        return SingletonBillPughDBConnection._SingletonHelper._instance
+
+    def __init__(self):
+        if SingletonBillPughDBConnection._SingletonHelper._instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            self.spark = SparkSession.builder.appName("Bill Pugh Singleton").getOrCreate()
+
+# Usage
+db_conn = SingletonBillPughDBConnection.get_instance()
+print(db_conn.spark)
+
+<< 5. Using Metaclasses >>
+from pyspark.sql import SparkSession
+
+class SingletonMeta(type):
+    _instances = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            instance = super().__call__(*args, **kwargs)
+            cls._instances[cls] = instance
+        return cls._instances[cls]
+
+class SingletonWithMetaDBConnection(metaclass=SingletonMeta):
+    def __init__(self):
+        self.spark = SparkSession.builder.appName("Metaclass Singleton").getOrCreate()
+
+# Usage
+db_conn = SingletonWithMetaDBConnection()
+print(db_conn.spark)
+
+<< 6. Decorator >> 
+from pyspark.sql import SparkSession
+
+def singleton(cls):
+    instances = {}
+    def get_instance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+    return get_instance
+
+@singleton
+class SingletonWithDecoratorDBConnection:
+    def __init__(self):
+        self.spark = SparkSession.builder.appName("Decorator Singleton").getOrCreate()
+
+# Usage
+db_conn = SingletonWithDecoratorDBConnection()
+print(db_conn.spark)
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 3. Adapter Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+''' Allow incompatible interfaces to work together.
+***************** Summary **********************
+Adapter Pattern: Use when you need to integrate with legacy systems or third-party libraries with incompatible interfaces. 
+It focuses on making interfaces compatible and promoting reuse.
+Factory Pattern: Use when you need to manage the complexity of object creation, promoting loose coupling and encapsulating 
+the instantiation logic.
+''' 
+# << 1 - 3rd party Logger Adapter >>
+# Existing logger interface
+class Logger:
+    def log(self, message: str):
+        pass
+
+# Third-party logger with a different interface
+class ThirdPartyLogger:
+    def write_log(self, msg: str):
+        print(msg)
+
+# Adapter to make ThirdPartyLogger compatible with Logger interface
+class LoggerAdapter(Logger):
+    def __init__(self, third_party_logger: ThirdPartyLogger):
+        self.third_party_logger = third_party_logger
+
+    def log(self, message: str):
+        self.third_party_logger.write_log(message)
+
+# Usage
+third_party_logger = ThirdPartyLogger()
+logger = LoggerAdapter(third_party_logger)
+logger.log("This is a log message.")
+
+# << 2 - New Payment Gateway >>
+class PaymentProcessor:
+    def process_payment(self, amount: float):
+        pass
+class NewPaymentGateway:
+    def make_payment(self, money: float):
+        print(f"Processing payment of ${money} through NewPaymentGateway")
+class NewPaymentGatewayAdapter(PaymentProcessor):
+    def __init__(self, new_gateway: NewPaymentGateway):
+        self.new_gateway = new_gateway
+
+    def process_payment(self, amount: float):
+        self.new_gateway.make_payment(amount)
+# Existing system usage
+def make_payment(payment_processor: PaymentProcessor, amount: float):
+    payment_processor.process_payment(amount)
+
+# Integrating the new payment gateway using the adapter
+new_gateway = NewPaymentGateway()
+adapter = NewPaymentGatewayAdapter(new_gateway)
+
+# Using the adapter to process the payment
+make_payment(adapter, 100.0)
 
 
-class CSVReader:
-    def read(self, spark, path):
-        return spark.read.csv(path, header=True, inferSchema=True)
-
-class ParquetReader:
-    def read(self, spark, path):
-        return spark.read.parquet(path)
-
-class DataReaderAdapter:
-    def __init__(self, reader):
-        self.reader = reader
-    
-    def read(self, spark, path):
-        return self.reader.read(spark, path)
-
-csv_reader = DataReaderAdapter(CSVReader())
-df = csv_reader.read(spark, "path/to/csv")
-4. Decorator Pattern
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 4. Decorator Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Add responsibilities to objects dynamically.
 
 
