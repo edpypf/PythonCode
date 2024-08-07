@@ -432,7 +432,7 @@ Summary
 Decorators in Python can be categorized based on their usage and the type of entity they 
 are modifying (functions, methods, classes, properties, etc.). They provide a powerful 
 way to extend and modify behavior in a clean and reusable manner.
-'''
+
 ###################### PySpark ETL examples to show when to use the ##############################3
 ## Command Pattern, 
 ## Strategy Pattern, 
@@ -442,49 +442,169 @@ way to extend and modify behavior in a clean and reusable manner.
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 5. Command Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Encapsulate a request as an object, thereby allowing for parameterization and queuing of requests.
 ******************************** Summary *************************************************
+support Execute and Undo methods
 '''
-class Command:
+from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession
+
+# Command interface
+class Command(ABC):
+    @abstractmethod
     def execute(self):
         pass
 
-class ReadCSVCommand(Command):
+    @abstractmethod
+    def undo(self):
+        pass
+
+# Concrete Command for Extraction
+class ExtractCommand(Command):
     def __init__(self, spark, path):
         self.spark = spark
         self.path = path
-    
-    def execute(self):
-        return self.spark.read.csv(self.path, header=True, inferSchema=True)
+        self.df = None
 
-read_command = ReadCSVCommand(spark, "path/to/csv")
-df = read_command.execute()
+    def execute(self):
+        self.df = self.spark.read.csv(self.path, header=True, inferSchema=True)
+        print(f"Extracted data from {self.path}")
+        return self.df
+
+    def undo(self):
+        self.df = None
+        print(f"Undid extraction from {self.path}")
+
+# Concrete Command for Transformation
+class TransformCommand(Command):
+    def __init__(self, df):
+        self.df = df
+        self.original_df = df
+
+    def execute(self):
+        self.df = self.df.withColumn('new_column', self.df['existing_column'] * 2)
+        print("Transformed data by adding new_column")
+        return self.df
+
+    def undo(self):
+        self.df = self.original_df
+        print("Undid transformation")
+
+# Concrete Command for Loading
+class LoadCommand(Command):
+    def __init__(self, df, path):
+        self.df = df
+        self.path = path
+
+    def execute(self):
+        self.df.write.mode('overwrite').csv(self.path)
+        print(f"Loaded data to {self.path}")
+
+    def undo(self):
+        # Undo operation for load is tricky; for simplicity, we assume it cannot be undone
+        print("Load operation cannot be undone")
+
+# Command Manager
+class CommandManager:
+    def __init__(self):
+        self.history = []
+
+    def execute(self, command):
+        result = command.execute()
+        self.history.append(command)
+        return result
+
+    def undo(self):
+        if self.history:
+            command = self.history.pop()
+            command.undo()
+# Main
+# Initialize Spark session
+spark = SparkSession.builder.appName("ETL Command Pattern").getOrCreate()
+command_manager = CommandManager()
+
+# Extract data
+extract_command = ExtractCommand(spark, "data/input.csv")
+df = command_manager.execute(extract_command)
+
+# Transform data
+transform_command = TransformCommand(df)
+df = command_manager.execute(transform_command)
+
+# Load data
+load_command = LoadCommand(df, "data/output.csv")
+command_manager.execute(load_command)
+
+# Undo transformation (if needed)
+command_manager.undo()
+
+# Display resulting DataFrame
+df.show()
+
 '''
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 6. Strategy Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Define a family of algorithms, encapsulate each one, and make them interchangeable.
 ******************************************* Summary *************************************************
+Inter-changable
+'''
+from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession
 
-
-
-class ReadStrategy:
-    def read(self, spark, path):
+# Strategy interface
+class TransformationStrategy(ABC):
+    @abstractmethod
+    def transform(self, df):
         pass
 
-class CSVReadStrategy(ReadStrategy):
-    def read(self, spark, path):
-        return spark.read.csv(path, header=True, inferSchema=True)
+# Concrete Strategy 1: Add Column
+class AddColumnStrategy(TransformationStrategy):
+    def transform(self, df):
+        return df.withColumn('new_column', df['existing_column'] * 2)
 
-class ParquetReadStrategy(ReadStrategy):
-    def read(self, spark, path):
-        return spark.read.parquet(path)
+# Concrete Strategy 2: Filter Rows
+class FilterRowsStrategy(TransformationStrategy):
+    def transform(self, df):
+        return df.filter(df['existing_column'] > 10)
 
-class DataReader:
-    def __init__(self, strategy: ReadStrategy):
-        self.strategy = strategy
-    
-    def read(self, spark, path):
-        return self.strategy.read(spark, path)
+# Concrete Strategy 3: Drop Column
+class DropColumnStrategy(TransformationStrategy):
+    def transform(self, df):
+        return df.drop('existing_column')
+        
+# -------- Define the Context Class
+class DataFrameTransformer:
+    def __init__(self, strategy: TransformationStrategy):
+        self._strategy = strategy
 
-csv_reader = DataReader(CSVReadStrategy())
-df = csv_reader.read(spark, "path/to/csv")
+    def set_strategy(self, strategy: TransformationStrategy):
+        self._strategy = strategy
+
+    def transform(self, df):
+        return self._strategy.transform(df)
+
+# ------------ use it
+# Initialize Spark session
+spark = SparkSession.builder.appName("ETL Strategy Pattern").getOrCreate()
+
+# Load initial data
+df = spark.read.csv("data/input.csv", header=True, inferSchema=True)
+
+# Initialize transformer with a strategy
+transformer = DataFrameTransformer(AddColumnStrategy())
+
+# Apply the transformation
+transformed_df = transformer.transform(df)
+
+# Show resulting DataFrame
+transformed_df.show()
+
+# Change strategy to filter rows
+transformer.set_strategy(FilterRowsStrategy())
+filtered_df = transformer.transform(df)
+filtered_df.show()
+
+# Change strategy to drop column
+transformer.set_strategy(DropColumnStrategy())
+dropped_df = transformer.transform(df)
+dropped_df.show()
 
 '''
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 7. Observer Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -492,34 +612,90 @@ Define a one-to-many dependency between objects so that when one object changes 
 all its dependents are notified and updated automatically.
 ******************************** Summary *************************************************
 '''
-class DataObserver:
-    def update(self, df):
+from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession
+
+# Observer interface
+class Observer(ABC):
+    @abstractmethod
+    def update(self, event, data):
         pass
 
-class PrintObserver(DataObserver):
-    def update(self, df):
-        df.show()
-
-class DataSubject:
+# Subject interface
+class Subject(ABC):
     def __init__(self):
-        self.observers = []
-    
-    def attach(self, observer: DataObserver):
-        self.observers.append(observer)
-    
-    def notify(self, df):
-        for observer in self.observers:
-            observer.update(df)
+        self._observers = []
 
-subject = DataSubject()
-observer = PrintObserver()
-subject.attach(observer)
-df = spark.read.csv("path/to/csv", header=True, inferSchema=True)
-subject.notify(df)
-8. Template Method Pattern
+    def attach(self, observer: Observer):
+        self._observers.append(observer)
+
+    def detach(self, observer: Observer):
+        self._observers.remove(observer)
+
+    def notify(self, event, data):
+        for observer in self._observers:
+            observer.update(event, data
+                           
+# Concrete Observer 1: Logger
+class Logger(Observer):
+    def update(self, event, data):
+        print(f"Logger: Event '{event}' with data {data}")
+
+# Concrete Observer 2: Data Validator
+class DataValidator(Observer):
+    def update(self, event, data):
+        if event == "transform":
+            print(f"DataValidator: Validating data...")
+            # Example validation logic
+            if data.count() == 0:
+                print("DataValidator: Validation failed - no rows in DataFrame")
+            else:
+                print("DataValidator: Validation passed")
+
+# ETL Process (Subject)
+class ETLProcess(Subject):
+    def __init__(self, spark):
+        super().__init__()
+        self.spark = spark
+        self.df = None
+
+    def extract(self, path):
+        self.df = self.spark.read.csv(path, header=True, inferSchema=True)
+        self.notify("extract", self.df)
+        print(f"Extracted data from {path}")
+
+    def transform(self):
+        self.df = self.df.withColumn('new_column', self.df['existing_column'] * 2)
+        self.notify("transform", self.df)
+        print("Transformed data by adding new_column")
+
+    def load(self, path):
+        self.df.write.mode('overwrite').csv(path)
+        self.notify("load", self.df)
+        print(f"Loaded data to {path}")
+
+# Initialize Spark session
+spark = SparkSession.builder.appName("ETL Observer Pattern").getOrCreate()
+
+# Initialize ETL process and observers
+etl_process = ETLProcess(spark)
+logger = Logger()
+validator = DataValidator()
+
+# Attach observers to the ETL process
+etl_process.attach(logger)
+etl_process.attach(validator)
+
+# Perform ETL steps
+etl_process.extract("data/input.csv")
+etl_process.transform()
+etl_process.load("data/output.csv")
+
+'''
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 8. Template Method Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Define the skeleton of an algorithm in a method, deferring some steps to subclasses.
-
-
+******************************** Summary *************************************************
+'''
 class DataProcessor:
     def process(self):
         self.read()
@@ -547,6 +723,7 @@ class CSVDataProcessor(DataProcessor):
 
 processor = CSVDataProcessor()
 processor.process()
+
 9. Builder Pattern
 Separate the construction of a complex object from its representation so that the same construction process can create different representations.
 
