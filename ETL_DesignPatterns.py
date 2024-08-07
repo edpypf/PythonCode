@@ -695,35 +695,330 @@ etl_process.load("data/output.csv")
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 8. Template Method Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Define the skeleton of an algorithm in a method, deferring some steps to subclasses.
 ******************************** Summary *************************************************
+The Template Pattern has several unique characteristics that distinguish it from the Strategy, Factory Method, Builder, and Command patterns. Here are some key points that highlight what makes the Template Pattern unique:
+Key Characteristics of the Template Pattern
+
+Algorithm Structure:
+Template Pattern: Defines the skeleton of an algorithm in a base class method, allowing subclasses to 
+override specific steps of the algorithm without changing its structure. This ensures a consistent 
+overall process while providing flexibility for customization.
+Strategy Pattern: Encapsulates entire algorithms or behaviors in separate classes and makes them 
+interchangeable. The focus is on swapping complete strategies rather than customizing parts of a 
+single algorithm.
+Factory Method Pattern: Focuses on creating objects. It defines a method in the base class for 
+creating objects but lets subclasses alter the type of objects created. The emphasis is on object 
+creation rather than process flow.
+Builder Pattern: Separates the construction of a complex object from its representation. It focuses 
+on step-by-step construction of an object, allowing for different representations of the final product.
+Command Pattern: Encapsulates a request as an object, thereby allowing for parameterization of 
+clients with queues, requests, and operations. It focuses on the action to be performed rather 
+than the structure of an algorithm.
+
+Inheritance and Method Overriding:
+Template Pattern: Relies heavily on inheritance and method overriding. The base class defines the 
+overall structure of the algorithm, while subclasses override specific steps. This pattern promotes 
+code reuse by allowing common logic to be defined in the base class.
+Strategy Pattern: Uses composition instead of inheritance. The context class delegates the algorithm 
+to a strategy object, making it easy to change the algorithm at runtime.
+Factory Method Pattern: Uses inheritance to defer the instantiation of objects to subclasses. The 
+focus is on the method of creating objects rather than algorithmic steps.
+Builder Pattern: Often uses composition. The builder class constructs the product step-by-step, 
+and the final product is returned to the client.
+Command Pattern: Uses composition. Commands encapsulate actions and are executed by the invoker. 
+The focus is on executing requests rather than algorithmic steps.
+
+Customization and Flexibility:
+Template Pattern: Provides a predefined structure with specific hooks for customization. Subclasses 
+are limited to modifying only certain parts of the algorithm, ensuring a consistent process flow.
+Strategy Pattern: Offers high flexibility by allowing the entire algorithm to be replaced. Each 
+strategy is a complete implementation that can vary independently.
+Factory Method Pattern: Customizes object creation, providing flexibility in the types of objects 
+created. The process of object creation can vary independently.
+Builder Pattern: Allows flexible and step-by-step construction of complex objects. Different builders 
+can produce different representations of the final product.
+Command Pattern: Provides flexibility in defining and executing commands. Commands can be parameterized, 
+queued, and executed in different contexts.
 '''
-class DataProcessor:
-    def process(self):
-        self.read()
-        self.transform()
-        self.load()
-    
-    def read(self):
-        raise NotImplementedError
-    
-    def transform(self):
-        raise NotImplementedError
-    
-    def load(self):
-        raise NotImplementedError
+<<<<<<<<<<<<<<<<<Template Pattern>>
+ 
+from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession, DataFrame
 
-class CSVDataProcessor(DataProcessor):
-    def read(self):
-        self.df = spark.read.csv("path/to/csv", header=True, inferSchema=True)
-    
-    def transform(self):
-        self.df = self.df.filter(self.df.age > 21)
-    
-    def load(self):
-        self.df.write.parquet("path/to/output")
+spark = SparkSession.builder.appName("ETL Template Pattern").getOrCreate()
 
-processor = CSVDataProcessor()
-processor.process()
+class ETLTemplate(ABC):
+    def run(self):
+        data = self.extract()
+        transformed_data = self.transform(data)
+        self.load(transformed_data)
 
+    @abstractmethod
+    def extract(self) -> DataFrame:
+        pass
+
+    @abstractmethod
+    def transform(self, data: DataFrame) -> DataFrame:
+        pass
+
+    @abstractmethod
+    def load(self, data: DataFrame):
+        pass
+
+class CSVToParquetETL(ETLTemplate):
+    def __init__(self, input_path: str, output_path: str):
+        self.input_path = input_path
+        self.output_path = output_path
+
+    def extract(self) -> DataFrame:
+        return spark.read.csv(self.input_path, header=True, inferSchema=True)
+
+    def transform(self, data: DataFrame) -> DataFrame:
+        return data.withColumnRenamed("old_column_name", "new_column_name")
+
+    def load(self, data: DataFrame):
+        data.write.parquet(self.output_path)
+
+class JSONToParquetETL(ETLTemplate):
+    def __init__(self, input_path: str, output_path: str):
+        self.input_path = input_path
+        self.output_path = output_path
+
+    def extract(self) -> DataFrame:
+        return spark.read.json(self.input_path)
+
+    def transform(self, data: DataFrame) -> DataFrame:
+        return data.withColumn("new_column", data["existing_column"] + 1)
+
+    def load(self, data: DataFrame):
+        data.write.parquet(self.output_path)
+
+# Example usage
+csv_etl = CSVToParquetETL("input.csv", "output.parquet")
+csv_etl.run()
+
+json_etl = JSONToParquetETL("input.json", "output.parquet")
+json_etl.run()
+
+<<<<<<<<<<<<<<<<<Strategy Pattern>>
+ from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession, DataFrame
+
+spark = SparkSession.builder.appName("ETL Strategy Pattern").getOrCreate()
+
+class ExtractStrategy(ABC):
+    @abstractmethod
+    def extract(self, path: str) -> DataFrame:
+        pass
+
+class CSVExtractStrategy(ExtractStrategy):
+    def extract(self, path: str) -> DataFrame:
+        return spark.read.csv(path, header=True, inferSchema=True)
+
+class JSONExtractStrategy(ExtractStrategy):
+    def extract(self, path: str) -> DataFrame:
+        return spark.read.json(path)
+
+class TransformStrategy(ABC):
+    @abstractmethod
+    def transform(self, data: DataFrame) -> DataFrame:
+        pass
+
+class RenameColumnTransformStrategy(TransformStrategy):
+    def transform(self, data: DataFrame) -> DataFrame:
+        return data.withColumnRenamed("old_column_name", "new_column_name")
+
+class AddColumnTransformStrategy(TransformStrategy):
+    def transform(self, data: DataFrame) -> DataFrame:
+        return data.withColumn("new_column", data["existing_column"] + 1)
+
+class LoadStrategy(ABC):
+    @abstractmethod
+    def load(self, data: DataFrame, path: str):
+        pass
+
+class ParquetLoadStrategy(LoadStrategy):
+    def load(self, data: DataFrame, path: str):
+        data.write.parquet(path)
+
+class ETLProcess:
+    def __init__(self, extract_strategy: ExtractStrategy, transform_strategy: TransformStrategy, load_strategy: LoadStrategy):
+        self.extract_strategy = extract_strategy
+        self.transform_strategy = transform_strategy
+        self.load_strategy = load_strategy
+
+    def run(self, input_path: str, output_path: str):
+        data = self.extract_strategy.extract(input_path)
+        transformed_data = self.transform_strategy.transform(data)
+        self.load_strategy.load(transformed_data, output_path)
+
+# Example usage
+csv_etl = ETLProcess(CSVExtractStrategy(), RenameColumnTransformStrategy(), ParquetLoadStrategy())
+csv_etl.run("input.csv", "output.parquet")
+
+json_etl = ETLProcess(JSONExtractStrategy(), AddColumnTransformStrategy(), ParquetLoadStrategy())
+json_etl.run("input.json", "output.parquet")
+
+<<<<<<<<<<<<<<<<<Factory Method Pattern>>>
+from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession, DataFrame
+
+spark = SparkSession.builder.appName("ETL Factory Method Pattern").getOrCreate()
+
+class ETLProcess(ABC):
+    @abstractmethod
+    def extract(self) -> DataFrame:
+        pass
+
+    @abstractmethod
+    def transform(self, data: DataFrame) -> DataFrame:
+        pass
+
+    @abstractmethod
+    def load(self, data: DataFrame):
+        pass
+
+    def run(self):
+        data = self.extract()
+        transformed_data = self.transform(data)
+        self.load(transformed_data)
+
+class CSVETLProcess(ETLProcess):
+    def __init__(self, input_path: str, output_path: str):
+        self.input_path = input_path
+        self.output_path = output_path
+
+    def extract(self) -> DataFrame:
+        return spark.read.csv(self.input_path, header=True, inferSchema=True)
+
+    def transform(self, data: DataFrame) -> DataFrame:
+        return data.withColumnRenamed("old_column_name", "new_column_name")
+
+    def load(self, data: DataFrame):
+        data.write.parquet(self.output_path)
+
+class ETLFactory(ABC):
+    @abstractmethod
+    def create_etl_process(self, input_path: str, output_path: str) -> ETLProcess:
+        pass
+
+class CSVETLFactory(ETLFactory):
+    def create_etl_process(self, input_path: str, output_path: str) -> ETLProcess:
+        return CSVETLProcess(input_path, output_path)
+
+# Usage
+factory = CSVETLFactory()
+etl_process = factory.create_etl_process("input.csv", "output.parquet")
+etl_process.run()
+
+<<<<<<<<<<<<<<<<<<<Builder Pattern>>
+The Builder Pattern constructs a complex ETL process step-by-step.
+
+from pyspark.sql import SparkSession, DataFrame
+
+spark = SparkSession.builder.appName("ETL Builder Pattern").getOrCreate()
+
+class ETLBuilder:
+    def __init__(self):
+        self.process = ETLProcess()
+
+    def set_input_path(self, input_path: str):
+        self.process.input_path = input_path
+        return self
+
+    def set_output_path(self, output_path: str):
+        self.process.output_path = output_path
+        return self
+
+    def set_transformation(self, transformation):
+        self.process.transformation = transformation
+        return self
+
+    def build(self):
+        return self.process
+
+class ETLProcess:
+    def __init__(self):
+        self.input_path = None
+        self.output_path = None
+        self.transformation = None
+
+    def run(self):
+        data = self.extract()
+        transformed_data = self.transformation(data)
+        self.load(transformed_data)
+
+    def extract(self) -> DataFrame:
+        return spark.read.csv(self.input_path, header=True, inferSchema=True)
+
+    def load(self, data: DataFrame):
+        data.write.parquet(self.output_path)
+
+# Usage
+def rename_transformation(data: DataFrame) -> DataFrame:
+    return data.withColumnRenamed("old_column_name", "new_column_name")
+
+builder = ETLBuilder()
+etl_process = (builder
+               .set_input_path("input.csv")
+               .set_output_path("output.parquet")
+               .set_transformation(rename_transformation)
+               .build())
+etl_process.run()
+
+<<<<<<<<<<<<<<<Command Pattern>>
+The Command Pattern encapsulates ETL operations as command objects that can be executed.
+'''
+from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession, DataFrame
+
+spark = SparkSession.builder.appName("ETL Command Pattern").getOrCreate()
+
+class Command(ABC):
+    @abstractmethod
+    def execute(self):
+        pass
+
+class ExtractCommand(Command):
+    def __init__(self, input_path: str):
+        self.input_path = input_path
+        self.data = None
+
+    def execute(self):
+        self.data = spark.read.csv(self.input_path, header=True, inferSchema=True)
+        return self.data
+
+class TransformCommand(Command):
+    def __init__(self, data: DataFrame):
+        self.data = data
+
+    def execute(self):
+        return self.data.withColumnRenamed("old_column_name", "new_column_name")
+
+class LoadCommand(Command):
+    def __init__(self, data: DataFrame, output_path: str):
+        self.data = data
+        self.output_path = output_path
+
+    def execute(self):
+        self.data.write.parquet(self.output_path)
+
+# Usage
+extract_command = ExtractCommand("input.csv")
+data = extract_command.execute()
+
+transform_command = TransformCommand(data)
+transformed_data = transform_command.execute()
+
+load_command = LoadCommand(transformed_data, "output.parquet")
+load_command.execute()
+'''
+Summary of Differences
+Template Pattern: Provides a predefined structure with specific hooks for customization. Subclasses modify parts of the algorithm.
+Strategy Pattern: Allows the entire transformation strategy to be swapped. Different strategies implement different transformations.
+Factory Method Pattern: Focuses on creating ETL processes for different input formats, allowing the creation process to vary independently.
+Builder Pattern: Constructs a complex ETL process step-by-step, allowing for flexible and incremental construction.
+Command Pattern: Encapsulates each step of the ETL process as command objects that can be executed independently.
+'''
 9. Builder Pattern
 Separate the construction of a complex object from its representation so that the same construction process can create different representations.
 
