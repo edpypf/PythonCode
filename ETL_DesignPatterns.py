@@ -1019,10 +1019,8 @@ Factory Method Pattern: Focuses on creating ETL processes for different input fo
 Builder Pattern: Constructs a complex ETL process step-by-step, allowing for flexible and incremental construction.
 Command Pattern: Encapsulates each step of the ETL process as command objects that can be executed independently.
 '''
-9. Builder Pattern
+<<<<<<<<<<<<<<<<<<<<<<<<<<<< 9. Builder Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Separate the construction of a complex object from its representation so that the same construction process can create different representations.
-
-
 class DataFrameBuilder:
     def __init__(self):
         self.df = None
@@ -1040,20 +1038,67 @@ class DataFrameBuilder:
 
 builder = DataFrameBuilder()
 df = builder.read_csv(spark, "path/to/csv").filter("age > 21").build()
-10. Prototype Pattern
+  
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 10. Prototype Pattern - deep copy and clone >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
+from abc import ABC, abstractmethod
+from pyspark.sql import SparkSession, DataFrame
+from copy import deepcopy
 
+spark = SparkSession.builder.appName("ETL Prototype Pattern").getOrCreate()
 
-class DataFramePrototype:
-    def __init__(self, df):
-        self.df = df
-    
+# Prototype Interface
+class ETLProcess(ABC):
+    @abstractmethod
     def clone(self):
-        return self.df
+        pass
 
-prototype = DataFramePrototype(spark.read.csv("path/to/csv", header=True, inferSchema=True))
-df_clone = prototype.clone()
-11. Chain of Responsibility Pattern
+    @abstractmethod
+    def extract(self) -> DataFrame:
+        pass
+
+    @abstractmethod
+    def transform(self, data: DataFrame) -> DataFrame:
+        pass
+
+    @abstractmethod
+    def load(self, data: DataFrame):
+        pass
+
+    def run(self):
+        data = self.extract()
+        transformed_data = self.transform(data)
+        self.load(transformed_data)
+
+# Concrete Prototype
+class CSVToParquetETL(ETLProcess):
+    def __init__(self, input_path: str, output_path: str):
+        self.input_path = input_path
+        self.output_path = output_path
+
+    def clone(self):
+        return deepcopy(self)
+
+    def extract(self) -> DataFrame:
+        return spark.read.csv(self.input_path, header=True, inferSchema=True)
+
+    def transform(self, data: DataFrame) -> DataFrame:
+        return data.withColumnRenamed("old_column_name", "new_column_name")
+
+    def load(self, data: DataFrame):
+        data.write.parquet(self.output_path)
+
+# Usage
+original_etl = CSVToParquetETL("input.csv", "output.parquet")
+original_etl.run()
+
+# Clone the original ETL process and modify its configuration
+cloned_etl = original_etl.clone()
+cloned_etl.input_path = "input2.csv"
+cloned_etl.output_path = "output2.parquet"
+cloned_etl.run()
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 11. Chain of Responsibility Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request.
 
 
@@ -1082,9 +1127,9 @@ class ReadParquetHandler(Handler):
 csv_handler = ReadCSVHandler()
 parquet_handler = csv_handler.set_next(ReadParquetHandler())
 df = csv_handler.handle("csv")
-12. Mediator Pattern
+  
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 12. Mediator Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Define an object that encapsulates how a set of objects interact.
-
 
 class Mediator:
     def notify(self, sender, event):
@@ -1110,9 +1155,9 @@ class CSVDataComponent(DataComponent):
 mediator = DataMediator()
 component = CSVDataComponent(mediator)
 mediator.notify(component, "read")
-13. State Pattern
+         
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 13. State Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Allow an object to alter its behavior when its internal state changes.
-
 
 class State:
     def handle(self, context):
@@ -1149,7 +1194,8 @@ context = Context(ReadingState())
 context.request()
 context.request()
 context.request()
-14. Memento Pattern
+       
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 14. Memento Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Without violating encapsulation, capture and externalize an object's internal state so that the object can be restored to this state later.
 
 
@@ -1179,9 +1225,9 @@ memento = originator.save_to_memento()
 
 originator.set_state(spark.read.csv("path/to/another/csv", header=True, inferSchema=True))
 originator.restore_from_memento(memento)
-15. Interpreter Pattern
-Given a language, define a representation for its grammar along with an interpreter that uses the representation to interpret sentences in the language.
-
+       
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 15. Interpreter Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Rule based approach
 
 class Expression:
     def interpret(self, context):
@@ -1206,10 +1252,9 @@ filter_expr = FilterExpression()
 read_expr.interpret(context)
 filter_expr.interpret(context)
 context.df.show()
-16. Iterator Pattern
+           
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 16. Iterator Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
-
-
 class DataFrameIterator:
     def __init__(self, df):
         self.df = df.collect()
@@ -1231,10 +1276,9 @@ iterator = DataFrameIterator(df)
 
 for row in iterator:
     print(row)
-17. Visitor Pattern
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 17. Visitor Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Represent an operation to be performed on the elements of an object structure.
-
-
 class DataFrameVisitor:
     def visit(self, df):
         pass
@@ -1253,7 +1297,8 @@ schema_visitor = SchemaVisitor()
 
 show_visitor.visit(df)
 schema_visitor.visit(df)
-18. Composite Pattern
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 18. Composite Pattern >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Compose objects into tree structures to represent part-whole hierarchies.
 
 
