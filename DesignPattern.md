@@ -23,7 +23,7 @@ The visitor pattern fits for the situation of : **Hierarchy of elements X multi 
 - **Visitor Interface**: (EmployeeVisitor): Defines methods for visiting engineers and managers.
 - **Concrete Visitor**: (CompensationVisitor, DetailsVisitor): Implement the specific operations for calculating total compensation and collecting details.
 
-## TemplatePattern 
+## TemplatePattern - fixed order
 define the skeleton of an algorithm in a base class but allows subclasses to provide specific implementations for some of the steps. typically marked as **final to prevent subclasses from altering the sequence of the steps**.
 The Template pattern fits for the situation of : **creating a fixed sequence of steps in an algorithm while allowing some flexibility in how individual steps are executed.**
 [Template Game Chess Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateGameChess.py) [Template Coffee Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/TemplateCoffee.py)
@@ -33,7 +33,7 @@ The Template pattern fits for the situation of : **creating a fixed sequence of 
 - **Concrete Methods**:(boilWater and pourInCup) The abstract class contains some concrete methods with implementations that are common to all subclasses.  
 - **Hook Methods**: (customerWantsCondiments):  Optionally, the abstract class may provide hook methods, which are methods with default implementations that can be overridden by subclasses if needed. hook methods in the Template Method Pattern offer a way to provide optional, extendable behavior in the algorithm defined by the template method. They give subclasses the opportunity to customize specific steps of the algorithm without altering the overall structure of the template method.
   
-## StrategyPattern  
+## StrategyPattern - options
 The Strategy Pattern is used to define a family of algorithms, encapsulate each one, and make them interchangeable. It allows the client to select an algorithm at runtime.
 The Strategy pattern fits for the situation of : **a list of option methods can be provided, and up to client to choose at runtime**
 [Strategy Pattern - Payment Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/StrategyPayment.py)
@@ -41,7 +41,7 @@ The Strategy pattern fits for the situation of : **a list of option methods can 
 - **Concrete Strategies**: (CreditCardPayment, PayPalPayment): Each concrete strategy provides a element and derived method(same name) on top of base class
 - **Context**: (ShopperingCart--> set_payment_strategy): The class that uses a Strategy object. It maintains a reference to a Strategy instance and delegates the algorithm implementation to it.
 
-## StatePattern  
+## StatePattern - state change
 The State Pattern allows an object to change its behavior when its internal state changes. Instead of managing state transitions within a single class, the State Pattern delegates this responsibility to state-specific classes.
 Fits situation of : **It is useful for objects that need to exhibit different behaviors based on their current state.**
 [State TCP Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/StateTCP.py), [State Manual Phone Script using Enum](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/StatePhoneManual.py)
@@ -54,7 +54,7 @@ In Python, the notation context: 'TCPConnection' is a type hint that specifies t
 parameter as TCPConnection. The quotes around 'TCPConnection' are used to indicate a forward reference,
 which is necessary when the TCPConnection class is referenced before it is fully defined. 
 ```
-## ObserverPattern  
+## ObserverPattern - attribue change
 Subscription mechanism that allows multiple objects (observers) to listen to and react to events or changes in the state of the subject.
 Fits situation of : **distributed event-handling systems, where the subject maintains a list of observers that need to be notified of changes.**
 [Property Observer - Age for Vote Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_dependencies_age.py), [Property Observer - Age for drive Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/property_observers.py), [Property Price Observer - Stock ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/PropertyObserver_Price_ChatGpt.py) 
@@ -163,7 +163,7 @@ subject.attach(observer2)
 subject.generate_event("Event 1")
 subject.generate_event("Event 2")
 ``` 
-## MementoPattern  
+## MementoPattern - undo/redo
 The Memento pattern fits for the situation of : **scenarios where maintaining and restoring object states is crucial, such as in undo/redo functionality in applications.**
 [Memento-Bank Balance Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalance.py) | [Memento-Bank Balances redo/undo Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoBalanceUndoRedo.py) | [Memento-TextEditor ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MementoTextEditor_ChatGpt.py)
 - **Memento**: (Memento): The Memento Pattern ensures that the state of an object is saved and restored without violating its encapsulation. The internal state is only accessible through the Memento, and only the Originator can create and use Mementos.
@@ -171,7 +171,7 @@ The Memento pattern fits for the situation of : **scenarios where maintaining an
 - **Caretaker**: (Caretaker): Defines undo and redo.
 - **Drawback**: Memory Overhead: Storing multiple Mementos can consume a significant amount of memory, especially if the state objects are large or if there are many states to save. Complexity: Implementing the Memento Pattern can add complexity to the code, particularly in managing the Caretaker and ensuring that Mementos are properly created and used.
 
-## MediatorPattern  
+## MediatorPattern - chatroom
 The Mediator pattern fits for the situation of : **scenarios where multiple objects need to communicate in a complex manner, and to maintain a clean and decoupled architecture.**
 [Mediator-Chatroom Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatRoom.py) | [Mediator-with Event Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorWithEvent.py) | [Mediator-Chatroom ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/MediatorChatroom_ChatGpt.py)
 - **Mediator**: (ABC used by chatroom): Defines an interface for communication between Colleague objects..
@@ -179,7 +179,7 @@ The Mediator pattern fits for the situation of : **scenarios where multiple obje
 - **Users**: (colleague):Represents a user in the chat room. It communicates with other users through the ChatRoom mediator.
 - **Drawback**: **Mediator Complexity**: The mediator can become a complex, monolithic class as it handles more interactions and behavior. **Single Point of Failure**: The mediator is a central component; if it fails, the whole system’s communication may be disrupted.
 
-## command  
+## command - request as object
 The Command pattern fits for the situation of : **encapsulates requests as objects, allowing for parameterization, queuing, logging, and support for undoable operations, thereby decoupling the sender from the receiver of the request.**
 [Basic Command Example](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/BankAccountCommand_basic.py) | [Composite Command Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/CompositeCommand.py) | [Command TextEditor ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Command_TextEdit_Chatgpt.py)
 - **Command Interface**: (ABC,abstractmethod for execute/undo methods)
@@ -187,7 +187,7 @@ The Command pattern fits for the situation of : **encapsulates requests as objec
 - **Invoker**: (TextEditorInvoker):invoker class that stores commands and handles execution, undo, and redo operations.
 - **Context or Client**:  The client code creates instances of the TextEditor and command classes, assigns them to the invoker, and triggers their execution, undo, and redo operations.
 
-## chainofresponsibility
+## chainofresponsibility - next handler
 The Chain of Responsibility pattern fits for the situation of : **allows multiple objects to handle a request in a sequential chain, decoupling the sender from the receiver and enabling each handler to process the request or pass it to the next handler.**
 [Chain Basic Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainMethod.py) | [ChainOR Broker Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Chain_Broker.py) | [ChainOR_Support ChatGpt Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainOfResponsibility_ChatGpt.py) | [ChainOR ETL Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ChainOfResponsibilityETL.py)
 - **EventCaller**: __call__ for item in self: item(*args, **kwargs)
@@ -209,7 +209,7 @@ The Chain of Responsibility pattern fits for the situation of : **allows multipl
             print(goblin)  # Attack doubled and defense increased
     print(goblin)  # Back to initial state
   
-## interpreter
+## interpreter - rules
 The interpreter pattern fits for the situation of : **Configurable systems where behavior is defined by expressions or rules|Expression evaluation|Language parsing**.
 [Interpreter Discount Strategy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/InterpreterDiscountStrategy.py) | [Interpreter ETL Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IntedpreterETL.py)
 - **Rules or Operations**: (Business rules, Grammar or Math Operators): (PercentageDiscount, FlatDiscount, Conditionaldiscount) | (Literal, Variable, Rule according to Grammar) | (+, -, *, Number) 
@@ -230,7 +230,7 @@ Apply Discounts: For a total price of $60, apply the discounts to get the final 
 Flexibility: Easily add or modify discount rules without changing the core logic.
 Extensibility: Supports the addition of new types of discounts by implementing new expression classes.
  ```
-## IteratorPattern  
+## IteratorPattern - __iter__() 
 The Iterator pattern fits for the situation of : **scenarios where you need to process a collection of items in a specific way without exposing the internal structure of the collection.**
 [Iterator Business Order Processing Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorBusinessOrder.py) | [Iterator ETL Pyspark Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/IteratorETLPyspark.py)
 - **Object Class**: (Order): Represents a customer order with attributes like order_id, customer_name, and total_amount.
@@ -304,14 +304,14 @@ The Bridge pattern fits for the situation of : **you can create a more flexible,
 alert_notification_with_email = AlertNotification(email_sender);
 reminder_notification_with_sms = ReminderNotification(sms_sender)
 ```
-## CompositePattern  
+## CompositePattern - Herichary = individual
 The Composite pattern fits for the situation of : **represent a hierarchy of objects, where individual objects and compositions of objects need to be manipulated in the same way.**
 [Composite Nerual Network Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composit_neural_networks.py) | [Composite Org Hierarchy Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Composite_Org_Hierarchy.py)
 - **Component**: (Employee): base interface for all objects in the composition, including employees and managers.
 - **Leaf**: (Developers, Designer): A basic element of the composition that does not have any children. It implements the Component interface. individual employees who do not have any direct reports.
 - **Composite**: (Manager): A composite element that has children. It implements the Component interface and provides mechanisms to add and remove children. managers who can have direct reports, which can be either individual employees or other managers. This setup allows for a flexible and scalable representation of an organizational hierarchy, making it easy to manage complex structures of employees and managers.
 
-## DecoratorPattern  
+## DecoratorPattern - @
 The Decorator pattern fits for the situation of : **allows behavior to be added to individual objects, either statically or dynamically, without affecting the behavior of other objects from the same class. It is typically used to adhere to the Single Responsibility Principle, allowing functionalities to be divided between classes with unique areas of concern.**
 [Decorator Basic Timeit Function Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/Decorator_Function.py)| [Decorator Booking System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/DecoratorBookingSystem.py) | [Decorator Ordering Coffee Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/DecoratorCoffee.py) | [Decorator ETL Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/DecoratorETL.py)
 - **Dynamic Behavior Addition**: Adds responsibilities to objects at runtime.
@@ -327,7 +327,7 @@ The Decorator pattern fits for the situation of : **allows behavior to be added 
         print(f"Booking {room_type} for customer {customer_id}.")
 - **@wraps(func)**: The @wraps(func) decorator from the functools module is used to preserve the original function's metadata (such as its name, docstring, and module) when it is wrapped by another function. This is crucial for accurate logging, debugging, and maintaining the integrity of the function's signature and documentation.
 
-## ProxyPattern  
+## ProxyPattern - 
 The Proxy Pattern provides a surrogate or placeholder for another object to control access to it. The proxy object acts as an intermediary, adding a level of indirection to support various operations. Suitable for : **access control, lazy initialization, logging, or remote access**
 [Proxy_OnlinePayment System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyOnlinePaymentSystem.py) | [Proxy DB Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyDBConnection.py) | [Proxy DB Connection Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/ProxyETL.py)
 - **Key Point**: 
@@ -341,14 +341,14 @@ Remote Proxy: The proxy can represent an object in a different address space, ma
 - **RealSubject**: (RealPayment): Implements the process_payment method to perform the actual payment processing.
 - **Proxy**: (PaymentProxy): Controls access to the RealPayment object. Adds authentication and logging functionalities.
 
-## FlyweightPattern  
+## FlyweightPattern - sharing  
 The Flyweight pattern aims to reduce memory usage by sharing as much data as possible. Here’s how it’s applied in your code. Suitable for : **scenarios where there is a large number of objects that can share common data to save memory.**
 [Flyweight userName Searching Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_Reuse_Name_String.py) | [FlyWeight Doc Management System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyweightDocumentMgmtSystem.py) | [FlyWeight Text Formatting Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyWeight_CapChar.py) | [FlyWeight Doc Management System Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FlyweightETLoverFunction.py)
 - **Flyweight Class**: (font, color): Represents shared state (e.g., font, color). Represents the shared state (font and color) of a word.
 - **Context Class**: (position): Represents unique state (e.g., position in the document). Ensures that flyweight instances are shared and reused to minimize memory usage.
 - **Flyweight Factory**: (Manager): Manages the creation and reuse of flyweight objects. Ensures that flyweight instances are shared and reused to minimize memory usage.
 
-## FacadePattern  
+## FacadePattern - booking
 The Facade pattern fits for the situation of : **where you need to simplify complex systems, decouple clients from subsystems, create a unified interface, and improve code readability and maintenance.**
 [Facade online Hotel Booking Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FacadeOnlineHotelBooking.py) | [Facade OnlineTravel Booking Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FacadeOnLineTravelBooking.py)
 | [Facade ETL better than Function Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FacadeETLvsFunction.py)
@@ -369,7 +369,7 @@ This pattern allows for a flexible and readable way to create different types of
 having to manually set each attribute every time. The Director controls the construction process,
 ensuring that the creation of complex objects follows a consistent and easy-to-understand sequence.
 ```
-## FactoryPattern  
+## FactoryPattern - 
 The Factory pattern suitable for: **Configuration Objects, DB Queries, Game Development, Document Generation, User Interface (UI) Components**
 [Factory Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryConcept.py) | [Factory Method Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryMethod.py) | [Factory Doc Report Invoice Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryReportInvoiceDoc.py) | [Factory ETL Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/FactoryETL.py)
 - **Creator Class**: (DocumentCreator): defines the create_document factory method and the print_document method that uses the factory method to create a Document and print it.
@@ -381,7 +381,7 @@ the Factory Method pattern is used to create different types of documents (Repor
 by centralizing and encapsulating the creation logic in the DocumentCreator class and its subclasses.
 This makes the system flexible and easy to extend with new document types without modifying existing code.
 ```
-## SingletonPattern  
+## SingletonPattern - common one instance
 The Singleton pattern suitable for: **useful when exactly one object is needed to coordinate actions across the system.**
 [Singleton DB allocator Concept Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDBAllocator.py) | [Singleton Decorator Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonDecorator.py) | [Singleton Metaclass Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMetaclass.py) | [SingletonMonoState Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonMonoState.py) | [Singleton TestCases Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonTestCases.py) | [Singleton Configuration Manager Example Script](https://github.com/edpypf/PythonCode/blob/main/DesignPattern/SingletonConfigurationManager.py)
 ``` Bash
